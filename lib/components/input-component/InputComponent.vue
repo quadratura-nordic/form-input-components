@@ -5,7 +5,14 @@
       'read-only-input-disabled-movement': readOnly && !modelValue,
     }"
   >
-    <input :type="inputType" placeholder=" " :id="'input' + id" v-model="val" :readonly="readOnly" />
+    <input
+      :type="inputType"
+      placeholder=" "
+      :id="'input' + id"
+      v-model="val"
+      :readonly="readOnly"
+      ref="inputComponent"
+    />
     <label :for="'input' + id"
       >{{ placeHolder }} <template v-if="errorMessage">- {{ errorMessage }}</template></label
     >
@@ -13,9 +20,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, defineEmits, defineProps, withDefaults } from "vue";
+import { computed, defineEmits, defineProps, withDefaults, ref } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
+const inputComponent = ref<HTMLInputElement | null>(null);
 
 const props = withDefaults(
   defineProps<{
@@ -43,6 +51,11 @@ const val = computed({
 function clearModelValue() {
   val.value = "";
 }
+
+function focusInput() {
+  inputComponent.value?.focus();
+}
+defineExpose({ focusInput });
 </script>
 
 <style lang="scss">

@@ -122,8 +122,6 @@ const value = computed({
     return null;
   },
   set(val: unknown | null | unknown[]) {
-    console.log(val, props.modelValue);
-
     if (val) {
       if (props.multiSelect) {
         emit("update:modelValue", val);
@@ -170,6 +168,7 @@ function open() {
 }
 function close() {
   opened.value = false;
+  upSideDown.value = false;
   searchValue.value = "";
 }
 function heightCalculation() {

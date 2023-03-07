@@ -106,12 +106,7 @@
 
     <div class="form-input-box">
       <p class="form-input-box-title">Dropdown Component Search</p>
-      <DropdownComponent
-        v-model="dropdownValue"
-        placeHolder="Dropdown"
-        :options="dropdownOptions"
-        :search-box="true"
-      />
+      <DropdownComponent v-model="dropdownValue" placeHolder="Dropdown" :options="dropdownOptions" :search-box="true" />
       <p class="form-input-box-title">Dropdown Component Search Multiselect Error</p>
       <DropdownComponent
         v-model="dropdownValueMultiSelect"
@@ -127,18 +122,86 @@
 
       <p class="form-input-value">Value: {{ dropdownValueMultiSelect }}</p>
     </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Input Component With Suggestions</p>
+      <InputComponentWithSuggestions
+        v-model="inputSuggestions"
+        placeHolder="Input with suggestions"
+        :suggestions="suggestions"
+      />
+
+      <p class="form-input-box-title">Input Component With Suggestions Errors</p>
+      <InputComponentWithSuggestions
+        v-model="inputSuggestions"
+        placeHolder="Input with suggestions"
+        :suggestions="suggestions"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ inputSuggestions }}</p>
+    </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Input Date Component</p>
+      <InputDateComponent v-model="inputDate" placeHolder="Date input" />
+
+      <p class="form-input-box-title">Input Date Component Error</p>
+      <InputDateComponent
+        v-model="inputDate"
+        placeHolder="Date input"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ inputDate }}</p>
+    </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Time Picker Component</p>
+      <TimePickerComponent
+        v-model="timeSelected"
+        :time-from="7"
+        :time-to="22"
+        :minute-interval="5"
+        :place-holder="'Select time'"
+      />
+
+      <p class="form-input-box-title">Time Picker Component Error</p>
+      <TimePickerComponent
+        v-model="timeSelected"
+        :time-from="7"
+        :time-to="22"
+        :minute-interval="5"
+        :place-holder="'Select time'"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ timeSelected }}</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import InputComponent from "../lib/components/input-component/InputComponent.vue";
 import DropdownComponent from "../lib/components/dropdown-component/DropdownComponent.vue";
+import InputComponentWithSuggestions from "../lib/components/input-with-suggestions/InputComponentWithSuggestions.vue";
+import InputDateComponent from "../lib/components/input-date-component/InputDateComponent.vue";
+import TimePickerComponent from "../lib/components/time-picker-component/TimePickerComponent.vue";
 
 import { ref } from "vue";
 
 const firstName = ref("");
 const dropdownValue = ref("");
 const dropdownValueMultiSelect = ref([]);
+const inputDate = ref("");
+const inputSuggestions = ref("");
+const timeSelected = ref(null);
 const dropdownOptions = ref([
   {
     value: "1",
@@ -157,6 +220,7 @@ const dropdownOptions = ref([
     name: "Option 4",
   },
 ]);
+const suggestions = ref(["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]);
 const errorPreview = ref(true);
 </script>
 
