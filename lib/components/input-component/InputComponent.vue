@@ -292,5 +292,74 @@ function clearModelValue() {
       transform: translate(-5px, -15px) scale(1);
     }
   }
+
+  &.input-component-full-border {
+    height: auto;
+    gap: 10px;
+
+    &.is-invalid {
+      input {
+        border: 1px solid var(--error-color);
+
+        &:focus {
+          border: 1px solid var(--error-color);
+        }
+      }
+      label {
+        color: var(--error-color);
+      }
+      input:focus + label {
+        color: var(--error-color);
+      }
+      input:not(:placeholder-shown) + label {
+        color: var(--error-color);
+      }
+    }
+
+    .clear-input {
+      bottom: 0;
+      height: 40px;
+    }
+
+    input {
+      height: 40px;
+      border: 1px solid var(--black-color);
+      border-radius: 0px;
+      color: var(--black-color);
+    }
+
+    label {
+      display: inline-flex;
+      color: var(--black-color);
+      background-color: transparent;
+      padding: 0px;
+      position: relative;
+    }
+
+    input:placeholder-shown + label {
+      transform: translate(0px, -2.5px) scale(1);
+    }
+
+    input:focus + label {
+      font-size: 15px;
+      color: var(--black-color);
+    }
+
+    ::-webkit-input-placeholder {
+      opacity: 0;
+      transition: inherit;
+    }
+    input:not(:placeholder-shown) + label {
+      font-size: 15px;
+      color: var(--black-color);
+    }
+
+    input:not(:placeholder-shown) + label,
+    input:focus + label {
+      color: var(--black-color);
+      font-size: 15px;
+      transform: translate(0px, -2.5px) scale(1);
+    }
+  }
 }
 </style>

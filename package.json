@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "sass": "^1.58.3",
+    "vite-plugin-css-injected-by-js": "^3.0.1",
     "vue": "^3.2.45"
   },
   "devDependencies": {

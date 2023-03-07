@@ -40,14 +40,123 @@
       />
       <p class="form-input-value">Value: {{ firstName }}</p>
     </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Input Component Full Border</p>
+      <InputComponent v-model="firstName" placeHolder="First Name" class="input-component-full-border" />
+      <p class="form-input-box-title">Input Component Full Border Disabled</p>
+      <InputComponent
+        v-model="firstName"
+        placeHolder="First Name"
+        class="input-component-full-border"
+        :read-only="true"
+      />
+      <p class="form-input-box-title">Input Component Full Border Error</p>
+      <InputComponent
+        v-model="firstName"
+        placeHolder="First Name"
+        class="input-component-full-border"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ firstName }}</p>
+    </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Dropdown Component</p>
+      <DropdownComponent v-model="dropdownValue" placeHolder="Dropdown" :options="dropdownOptions" />
+
+      <p class="form-input-box-title">Dropdown Component Error</p>
+      <DropdownComponent
+        v-model="dropdownValue"
+        placeHolder="Dropdown"
+        :options="dropdownOptions"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ dropdownValue }}</p>
+    </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Dropdown Component Multiselect</p>
+      <DropdownComponent
+        v-model="dropdownValueMultiSelect"
+        placeHolder="Dropdown"
+        :options="dropdownOptions"
+        :multi-select="true"
+      />
+      <p class="form-input-box-title">Dropdown Component Multiselect Error</p>
+      <DropdownComponent
+        v-model="dropdownValueMultiSelect"
+        placeHolder="Dropdown"
+        :options="dropdownOptions"
+        :multi-select="true"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+
+      <p class="form-input-value">Value: {{ dropdownValueMultiSelect }}</p>
+    </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Dropdown Component Search</p>
+      <DropdownComponent
+        v-model="dropdownValue"
+        placeHolder="Dropdown"
+        :options="dropdownOptions"
+        :search-box="true"
+      />
+      <p class="form-input-box-title">Dropdown Component Search Multiselect Error</p>
+      <DropdownComponent
+        v-model="dropdownValueMultiSelect"
+        placeHolder="Dropdown"
+        :options="dropdownOptions"
+        :search-box="true"
+        :multi-select="true"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+
+      <p class="form-input-value">Value: {{ dropdownValueMultiSelect }}</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import InputComponent from "../lib/components/input-component/InputComponent.vue";
+import DropdownComponent from "../lib/components/dropdown-component/DropdownComponent.vue";
+
 import { ref } from "vue";
 
 const firstName = ref("");
+const dropdownValue = ref("");
+const dropdownValueMultiSelect = ref([]);
+const dropdownOptions = ref([
+  {
+    value: "1",
+    name: "Option 1 very long text very long text very long text very long text very long text very long text",
+  },
+  {
+    value: "2",
+    name: "Option 2",
+  },
+  {
+    value: "3",
+    name: "Option 3",
+  },
+  {
+    value: "4",
+    name: "Option 4",
+  },
+]);
 const errorPreview = ref(true);
 </script>
 
