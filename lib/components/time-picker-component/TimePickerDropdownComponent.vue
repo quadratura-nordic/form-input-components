@@ -28,7 +28,7 @@ type Option =
 const props = withDefaults(
   defineProps<{
     placeHolder?: string;
-    modelValue: unknown | unknown[];
+    modelValue: unknown;
     options: Option[] | null;
     displayFunction?: (option: Option) => string;
     valueFunction?: (option: Option) => string;
@@ -45,7 +45,7 @@ const props = withDefaults(
 );
 
 const value = computed({
-  get(): unknown | null | unknown[] {
+  get(): unknown | null {
     if (!props.options) {
       return null;
     }
@@ -58,7 +58,7 @@ const value = computed({
 
     return null;
   },
-  set(val: unknown | null | unknown[]) {
+  set(val: unknown | null) {
     if (val) {
       emit("update:modelValue", props.valueFunction(val));
     }

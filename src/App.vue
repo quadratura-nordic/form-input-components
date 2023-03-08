@@ -3,13 +3,13 @@
     <p class="form-inputs-title">Form Inputs List</p>
     <div class="form-input-box">
       <p class="form-input-box-title">Input Component</p>
-      <InputComponent v-model="firstName" placeHolder="First Name" />
+      <InputComponent v-model="firstName" :placeHolder="'First Name'" />
       <p class="form-input-box-title">Input Component Disabled</p>
-      <InputComponent v-model="firstName" placeHolder="First Name" :read-only="true" />
+      <InputComponent v-model="firstName" :placeHolder="'First Name'" :read-only="true" />
       <p class="form-input-box-title">Input Component Error</p>
       <InputComponent
         v-model="firstName"
-        placeHolder="First Name"
+        :placeHolder="'First Name'"
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
@@ -20,18 +20,18 @@
 
     <div class="form-input-box">
       <p class="form-input-box-title">Input Component Border Bottom</p>
-      <InputComponent v-model="firstName" placeHolder="First Name" class="input-component-border-bottom" />
+      <InputComponent v-model="firstName" :placeHolder="'First Name'" class="input-component-border-bottom" />
       <p class="form-input-box-title">Input Component Border Bottom Disabled</p>
       <InputComponent
         v-model="firstName"
-        placeHolder="First Name"
+        :placeHolder="'First Name'"
         class="input-component-border-bottom"
         :read-only="true"
       />
       <p class="form-input-box-title">Input Component Border Bottom Error</p>
       <InputComponent
         v-model="firstName"
-        placeHolder="First Name"
+        :placeHolder="'First Name'"
         class="input-component-border-bottom"
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
@@ -43,18 +43,18 @@
 
     <div class="form-input-box">
       <p class="form-input-box-title">Input Component Full Border</p>
-      <InputComponent v-model="firstName" placeHolder="First Name" class="input-component-full-border" />
+      <InputComponent v-model="firstName" :placeHolder="'First Name'" class="input-component-full-border" />
       <p class="form-input-box-title">Input Component Full Border Disabled</p>
       <InputComponent
         v-model="firstName"
-        placeHolder="First Name"
+        :placeHolder="'First Name'"
         class="input-component-full-border"
         :read-only="true"
       />
       <p class="form-input-box-title">Input Component Full Border Error</p>
       <InputComponent
         v-model="firstName"
-        placeHolder="First Name"
+        :placeHolder="'First Name'"
         class="input-component-full-border"
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
@@ -62,6 +62,43 @@
         }"
       />
       <p class="form-input-value">Value: {{ firstName }}</p>
+    </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">TextArea Component No Resize</p>
+      <TextAreaComponent v-model="textAreaValue" :should-resize="false" :placeHolder="'TextArea'" />
+
+      <p class="form-input-box-title">TextArea Component With Resize</p>
+      <TextAreaComponent v-model="textAreaValue" :should-resize="true" :placeHolder="'TextArea'" />
+
+      <p class="form-input-box-title">TextArea Component Disabled</p>
+      <TextAreaComponent v-model="textAreaValue" :placeHolder="'TextArea'" :read-only="true" />
+      <p class="form-input-box-title">TextArea Component Error</p>
+      <TextAreaComponent
+        v-model="textAreaValue"
+        :placeHolder="'TextArea'"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ textAreaValue }}</p>
+    </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Checkbox Slider Component</p>
+      <CheckBoxSliderComponent v-model="checkboxSlider" :value-key="'1'" />
+
+      <p class="form-input-box-title">TextArea Component Error</p>
+      <CheckBoxSliderComponent
+        v-model="checkboxSlider"
+        :value-key="true"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ checkboxSlider }}</p>
     </div>
 
     <div class="form-input-box">
@@ -184,7 +221,50 @@
       />
       <p class="form-input-value">Value: {{ timeSelected }}</p>
     </div>
+
+    <div class="form-input-box">
+      <p class="form-input-box-title">Date Picker Component</p>
+      <CalendarComponent v-model="dateSelected" />
+
+      <p class="form-input-box-title">Date Picker Component disabled future dates</p>
+      <CalendarComponent v-model="dateSelected" :disable-future-dates="true" />
+
+      <p class="form-input-box-title">Date Picker Component disabled past dates</p>
+      <CalendarComponent v-model="dateSelected" :disable-past-dates="true" />
+
+      <p class="form-input-box-title">Date Picker Component Error</p>
+      <CalendarComponent
+        v-model="dateSelected"
+        :errorMessage="errorPreview ? 'Required' : ''"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+      <p class="form-input-value">Value: {{ dateSelected }}</p>
+    </div>
+    <div class="form-input-box">
+      <p class="form-input-box-title">Slider Component</p>
+      <SliderComponent v-model="sliderValue" :display-value="sliderValue" />
+      <p class="form-input-value">Value: {{ sliderValue }}</p>
+
+      <p class="form-input-box-title">Slider Component 10-100</p>
+      <SliderComponent v-model="sliderValue2" :min="10" :max="100" />
+      <p class="form-input-value">Value: {{ sliderValue2 }}</p>
+
+      <p class="form-input-box-title">Slider Component 3 Steps</p>
+      <SliderComponent v-model="sliderValue3" :steps="[1, 50, 100]" />
+      <p class="form-input-value">Value: {{ sliderValue3 }}</p>
+
+      <p class="form-input-box-title">Slider Component Error</p>
+      <SliderComponent
+        v-model="sliderValue"
+        :class="{
+          'is-invalid': true,
+        }"
+      />
+    </div>
   </div>
+  <!-- multiple slider, checkbox slider, calendar with dropdowns -->
 </template>
 
 <script setup lang="ts">
@@ -193,7 +273,10 @@ import DropdownComponent from "../lib/components/dropdown-component/DropdownComp
 import InputComponentWithSuggestions from "../lib/components/input-with-suggestions/InputComponentWithSuggestions.vue";
 import InputDateComponent from "../lib/components/input-date-component/InputDateComponent.vue";
 import TimePickerComponent from "../lib/components/time-picker-component/TimePickerComponent.vue";
-
+import CalendarComponent from "../lib/components/calendar-component/CalendarComponent.vue";
+import TextAreaComponent from "../lib/components/textarea-component/TextAreaComponent.vue";
+import SliderComponent from "../lib/components/slider-component/SliderComponent.vue";
+import CheckBoxSliderComponent from "../lib/components/checkbox-slider-component/CheckBoxSliderComponent.vue";
 import { ref } from "vue";
 
 const firstName = ref("");
@@ -202,6 +285,12 @@ const dropdownValueMultiSelect = ref([]);
 const inputDate = ref("");
 const inputSuggestions = ref("");
 const timeSelected = ref(null);
+const dateSelected = ref(null);
+const textAreaValue = ref("");
+const sliderValue = ref(0);
+const sliderValue2 = ref(0);
+const sliderValue3 = ref(0);
+const checkboxSlider = ref([]);
 const dropdownOptions = ref([
   {
     value: "1",

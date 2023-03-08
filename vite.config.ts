@@ -6,6 +6,7 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 export default defineConfig({
   plugins: [vue(), cssInjectedByJsPlugin()],
   build: {
+    outDir: "dist",
     lib: {
       entry: resolve(__dirname, "lib/main.ts"),
       name: "form-input-components",

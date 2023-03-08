@@ -1,41 +1,37 @@
 declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    placeHolder?: string | undefined;
+    modelValue?: {
+        hour: number;
+        minute: number;
+    } | null | undefined;
+    minuteInterval: number;
+    timeTo: number;
+    timeFrom: number;
     errorMessage?: string | undefined;
-    modelValue: unknown;
-    options: unknown[] | null;
-    displayFunction?: ((option: unknown) => string) | undefined;
-    valueFunction?: ((option: unknown) => string) | undefined;
-    multiSelect?: boolean | undefined;
-    searchBox?: boolean | undefined;
+    placeHolder?: string | undefined;
 }>, {
-    displayFunction: (option: any) => any;
-    valueFunction: (option: any) => any;
+    timeTo: number;
+    timeFrom: number;
     placeHolder: string;
-    multiSelect: boolean;
-    searchBox: boolean;
 }>, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    placeHolder?: string | undefined;
+    modelValue?: {
+        hour: number;
+        minute: number;
+    } | null | undefined;
+    minuteInterval: number;
+    timeTo: number;
+    timeFrom: number;
     errorMessage?: string | undefined;
-    modelValue: unknown;
-    options: unknown[] | null;
-    displayFunction?: ((option: unknown) => string) | undefined;
-    valueFunction?: ((option: unknown) => string) | undefined;
-    multiSelect?: boolean | undefined;
-    searchBox?: boolean | undefined;
+    placeHolder?: string | undefined;
 }>, {
-    displayFunction: (option: any) => any;
-    valueFunction: (option: any) => any;
+    timeTo: number;
+    timeFrom: number;
     placeHolder: string;
-    multiSelect: boolean;
-    searchBox: boolean;
 }>>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
     placeHolder: string;
-    displayFunction: (option: unknown) => string;
-    valueFunction: (option: unknown) => string;
-    multiSelect: boolean;
-    searchBox: boolean;
+    timeTo: number;
+    timeFrom: number;
 }>;
 export default _default;
 type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;

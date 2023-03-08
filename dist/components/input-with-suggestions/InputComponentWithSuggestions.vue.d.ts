@@ -1,28 +1,25 @@
 declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    inputType?: string | undefined;
     placeHolder?: string | undefined;
     errorMessage?: string | undefined;
-    modelValue?: unknown;
-    readOnly?: boolean | undefined;
+    modelValue: unknown;
+    suggestions: unknown[] | null;
+    valueKey?: string | undefined;
+    displayKey?: string | undefined;
 }>, {
-    inputType: string;
-    readOnly: boolean;
-}>, {
-    focusInput: () => void;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    inputType?: string | undefined;
+    placeHolder: string;
+}>, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
     placeHolder?: string | undefined;
     errorMessage?: string | undefined;
-    modelValue?: unknown;
-    readOnly?: boolean | undefined;
+    modelValue: unknown;
+    suggestions: unknown[] | null;
+    valueKey?: string | undefined;
+    displayKey?: string | undefined;
 }>, {
-    inputType: string;
-    readOnly: boolean;
+    placeHolder: string;
 }>>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
-    inputType: string;
-    readOnly: boolean;
+    placeHolder: string;
 }>;
 export default _default;
 type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;

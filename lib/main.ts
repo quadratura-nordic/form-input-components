@@ -3,5 +3,20 @@ import DropdownComponent from "./components/dropdown-component/DropdownComponent
 import InputComponentWithSuggestions from "./components/input-with-suggestions/InputComponentWithSuggestions.vue";
 import InputDateComponent from "./components/input-date-component/InputDateComponent.vue";
 import TimePickerComponent from "./components/time-picker-component/TimePickerComponent.vue";
+import TextAreaComponent from "./components/textarea-component/TextAreaComponent.vue";
+import SliderComponent from "./components/slider-component/SliderComponent.vue";
+import CalendarComponent from "./components/calendar-component/CalendarComponent.vue";
+import CheckBoxSliderComponent from "./components/checkbox-slider-component/CheckBoxSliderComponent.vue";
+// import defaultStyle from "./themes/default.scss";
 
-export { InputComponent, DropdownComponent, InputComponentWithSuggestions, InputDateComponent, TimePickerComponent };
+export {
+  InputComponent,
+  DropdownComponent,
+  InputComponentWithSuggestions,
+  InputDateComponent,
+  TimePickerComponent,
+  TextAreaComponent,
+  SliderComponent,
+  CalendarComponent,
+  CheckBoxSliderComponent,
+};

@@ -80,7 +80,7 @@ const props = withDefaults(
   defineProps<{
     placeHolder?: string;
     errorMessage?: string;
-    modelValue: unknown | unknown[];
+    modelValue: unknown;
     options: Option[] | null;
     displayFunction?: (option: Option) => string;
     valueFunction?: (option: Option) => string;
@@ -106,7 +106,7 @@ const dropdownComponent = ref<HTMLElement | null>();
 const searchValue = ref("");
 
 const value = computed({
-  get(): unknown | null | unknown[] {
+  get(): unknown | null {
     if (!props.options) {
       return null;
     }
@@ -121,7 +121,7 @@ const value = computed({
 
     return null;
   },
-  set(val: unknown | null | unknown[]) {
+  set(val: unknown | null) {
     if (val) {
       if (props.multiSelect) {
         emit("update:modelValue", val);

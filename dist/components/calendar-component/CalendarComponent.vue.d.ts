@@ -1,41 +1,30 @@
+import type { DateTime } from "./QDateTime";
 declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    placeHolder?: string | undefined;
+    modelValue?: DateTime | null | undefined;
+    format?: string | undefined;
     errorMessage?: string | undefined;
-    modelValue: unknown;
-    options: unknown[] | null;
-    displayFunction?: ((option: unknown) => string) | undefined;
-    valueFunction?: ((option: unknown) => string) | undefined;
-    multiSelect?: boolean | undefined;
-    searchBox?: boolean | undefined;
+    disableFutureDates?: boolean | undefined;
+    disablePastDates?: boolean | undefined;
 }>, {
-    displayFunction: (option: any) => any;
-    valueFunction: (option: any) => any;
-    placeHolder: string;
-    multiSelect: boolean;
-    searchBox: boolean;
+    format: string;
+    disableFutureDates: boolean;
+    disablePastDates: boolean;
 }>, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    placeHolder?: string | undefined;
+    modelValue?: DateTime | null | undefined;
+    format?: string | undefined;
     errorMessage?: string | undefined;
-    modelValue: unknown;
-    options: unknown[] | null;
-    displayFunction?: ((option: unknown) => string) | undefined;
-    valueFunction?: ((option: unknown) => string) | undefined;
-    multiSelect?: boolean | undefined;
-    searchBox?: boolean | undefined;
+    disableFutureDates?: boolean | undefined;
+    disablePastDates?: boolean | undefined;
 }>, {
-    displayFunction: (option: any) => any;
-    valueFunction: (option: any) => any;
-    placeHolder: string;
-    multiSelect: boolean;
-    searchBox: boolean;
+    format: string;
+    disableFutureDates: boolean;
+    disablePastDates: boolean;
 }>>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
-    placeHolder: string;
-    displayFunction: (option: unknown) => string;
-    valueFunction: (option: unknown) => string;
-    multiSelect: boolean;
-    searchBox: boolean;
+    format: string;
+    disableFutureDates: boolean;
+    disablePastDates: boolean;
 }>;
 export default _default;
 type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;
