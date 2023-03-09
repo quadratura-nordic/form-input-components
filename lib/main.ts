@@ -7,7 +7,6 @@ import TextAreaComponent from "./components/textarea-component/TextAreaComponent
 import SliderComponent from "./components/slider-component/SliderComponent.vue";
 import CalendarComponent from "./components/calendar-component/CalendarComponent.vue";
 import CheckBoxSliderComponent from "./components/checkbox-slider-component/CheckBoxSliderComponent.vue";
-// import defaultStyle from "./themes/default.scss";
 
 export {
   InputComponent,
