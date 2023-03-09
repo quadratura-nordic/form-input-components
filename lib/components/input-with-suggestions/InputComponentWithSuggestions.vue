@@ -50,6 +50,7 @@ const value = computed({
   },
   set(val) {
     inputValue.value = val;
+    close();
   },
 });
 

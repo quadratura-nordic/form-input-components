@@ -16,7 +16,14 @@
     <div class="calendar-container" v-if="show" v-click-outside="close">
       <div class="calendar-header">
         <div class="calendar-arrow left" @click="monthClick(-1)"></div>
-        <p>{{ months[now.month - 1] }} {{ now.year }}</p>
+        <p v-if="!monthDropdown">{{ months[now.month - 1] }} {{ now.year }}</p>
+        <DropdownComponent
+          v-if="monthDropdown"
+          :options="monthsArray"
+          :place-holder="'Month'"
+          v-model="selectedMonth"
+        />
+        <DropdownComponent v-if="yearDropdown" :options="yearsArray" :place-holder="'Year'" v-model="selectedYear" />
         <div class="calendar-arrow right" @click="monthClick(1)"></div>
       </div>
       <div class="calendar-days">
@@ -45,6 +52,7 @@ import { defineEmits, defineProps, withDefaults, onMounted, computed, ref, watch
 import InputComponent from "../input-component/InputComponent.vue";
 import QDateTime from "./QDateTime";
 import type { DateTime } from "./QDateTime";
+import DropdownComponent from "../dropdown-component/DropdownComponent.vue";
 
 type mapType = {
   YYYY: number;
@@ -78,11 +86,15 @@ const props = withDefaults(
     errorMessage?: string;
     disableFutureDates?: boolean;
     disablePastDates?: boolean;
+    monthDropdown?: boolean;
+    yearDropdown?: boolean;
   }>(),
   {
     format: "YYYY-MM-DD",
     disableFutureDates: false,
     disablePastDates: false,
+    monthDropdown: false,
+    yearDropdown: false,
   }
 );
 
@@ -91,7 +103,74 @@ const now = ref(QDateTime.locationTime());
 const date = ref([] as dateType[]);
 const months = ref(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
 const days = ref(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+const monthsArray = ref([
+  {
+    name: "January",
+    value: 0,
+  },
+  {
+    name: "February",
+    value: 1,
+  },
+  {
+    name: "March",
+    value: 2,
+  },
+  {
+    name: "April",
+    value: 3,
+  },
+  {
+    name: "May",
+    value: 4,
+  },
+  {
+    name: "June",
+    value: 5,
+  },
+  {
+    name: "July",
+    value: 6,
+  },
+  {
+    name: "August",
+    value: 7,
+  },
+  {
+    name: "September",
+    value: 8,
+  },
+  {
+    name: "October",
+    value: 9,
+  },
+  {
+    name: "November",
+    value: 10,
+  },
+  {
+    name: "December",
+    value: 11,
+  },
+]);
 
+const yearsArray = computed(() => {
+  const years = [];
+  for (let i = 1900; i <= 2100; i++) {
+    years.push({
+      name: i.toString(),
+      value: i,
+    });
+  }
+  return years;
+});
+
+const selectedYear = computed({
+  get: () => now.value.year,
+  set: (value) => {
+    now.value = now.value.set({ year: value });
+  },
+});
 const value = computed({
   get() {
     return props.modelValue;
@@ -115,6 +194,17 @@ const valueString = computed(() => {
 
   return stringValue;
   // return this.stringify(this.value);
+});
+
+const selectedMonth = computed({
+  get: () => {
+    const month = now.value.month - 1;
+    return month;
+  },
+  set: (value) => {
+    console.log(value);
+    now.value = now.value.set({ month: value + 1 });
+  },
 });
 
 onMounted(() => {
@@ -321,6 +411,7 @@ function stringify(time = now.value, format = props.format) {
         display: block;
         display: flex;
         align-items: center;
+        flex-shrink: 0;
         &.left {
           background: url("./calendarIcons.svg") -0 -18px;
         }

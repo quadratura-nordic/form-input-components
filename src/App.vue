@@ -232,6 +232,12 @@
       <p class="form-input-box-title">Date Picker Component disabled past dates</p>
       <CalendarComponent v-model="dateSelected" :disable-past-dates="true" />
 
+      <p class="form-input-box-title">Date Picker Component month dropdown</p>
+      <CalendarComponent v-model="dateSelected" :month-dropdown="true" />
+
+      <p class="form-input-box-title">Date Picker Component month and year dropdowns</p>
+      <CalendarComponent v-model="dateSelected" :month-dropdown="true" :year-dropdown="true" />
+
       <p class="form-input-box-title">Date Picker Component Error</p>
       <CalendarComponent
         v-model="dateSelected"
@@ -264,7 +270,7 @@
       />
     </div>
   </div>
-  <!-- multiple slider, checkbox slider, calendar with dropdowns -->
+  <!-- multiple slider, calendar with dropdowns -->
 </template>
 
 <script setup lang="ts">
