@@ -8,11 +8,11 @@
   ],
   "outDir": "dist",
   "main": "./dist/form-input-components.umd.cjs",
-  "module": "./dist/form-input-components.js",
+  "module": "./dist/form-input-components.common.js",
   "types": "./dist/main.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/form-input-components.js",
+      "import": "./dist/form-input-components.common.js",
       "require": "./dist/form-input-components.umd.js"
     },
     "./dist/style.css": "./dist/style.css"
