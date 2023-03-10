@@ -64,7 +64,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { withDefaults, onMounted, computed, ref, nextTick, defineEmits, defineProps } from "vue";
+import { withDefaults, onMounted, computed, ref, nextTick } from "vue";
 import InputComponent from "../input-component/InputComponent.vue";
 
 type Option =

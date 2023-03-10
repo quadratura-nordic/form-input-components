@@ -20,7 +20,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, defineEmits, defineProps, withDefaults, ref, defineExpose } from "vue";
+import { computed, defineEmits, defineProps, withDefaults, ref } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 const inputComponent = ref<HTMLInputElement | null>(null);
