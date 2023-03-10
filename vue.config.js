@@ -13,7 +13,8 @@ module.exports = defineConfig({
     // },
     output: {
       libraryExport: "default",
-      // filename: "bundle.js",
+
+      // filename: "output.js",
       // path: path.resolve(__dirname, "dist"),
     },
   },
