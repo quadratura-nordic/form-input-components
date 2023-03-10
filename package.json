@@ -8,16 +8,7 @@
   "description": "Form input components for Vue 3",
   "license": "MIT",
   "main": "./dist/form-input-components.common.js",
-  "module": "./dist/form-input-components.umd.js",
   "types": "./dist/main.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/form-input-components.umd.js",
-      "require": "./dist/form-input-components.umd.js",
-      "default": "./dist/form-input-components.common.js"
-    },
-    "./package.json": "./package.json"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/quadratura-nordic/form-input-components"
