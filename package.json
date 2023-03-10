@@ -1,13 +1,23 @@
 {
   "name": "form-input-components",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "files": [
     "dist"
   ],
   "author": "Quadratura Nordic",
   "description": "Form input components for Vue 3",
-  "main": "./dist/form-input-components.umd.min.js",
+  "license": "MIT",
+  "main": "./dist/form-input-components.common.js",
+  "module": "./dist/form-input-components.umd.js",
   "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/form-input-components.umd.js",
+      "require": "./dist/form-input-components.umd.js",
+      "default": "./dist/form-input-components.common.js"
+    },
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/quadratura-nordic/form-input-components"
@@ -54,7 +64,6 @@
     ],
     "parserOptions": {
       "ecmaVersion": 2020
-    },
-    "rules": {}
+    }
   }
 }

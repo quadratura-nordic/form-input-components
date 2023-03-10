@@ -1,4 +1,4 @@
-// const path = require("path");
+const path = require("path");
 const { defineConfig } = require("@vue/cli-service");
 
 module.exports = defineConfig({
@@ -7,15 +7,11 @@ module.exports = defineConfig({
     extract: false,
   },
   configureWebpack: {
-    // entry: "./lib/main.ts",
-    // resolve: {
-    //   extensions: [".tsx", ".ts", ".js"],
-    // },
+    target: "web",
+
     output: {
       libraryExport: "default",
-
-      // filename: "output.js",
-      // path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "dist"),
     },
   },
 });
