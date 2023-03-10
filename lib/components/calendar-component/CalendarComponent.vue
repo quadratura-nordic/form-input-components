@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div
     class="calendar-component"
     :class="{
@@ -494,4 +494,4 @@ function stringify(time = now.value, format = props.format) {
     }
   }
 }
-</style> -->
+</style>

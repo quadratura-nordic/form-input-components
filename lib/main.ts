@@ -5,7 +5,7 @@ import InputDateComponent from "./components/input-date-component/InputDateCompo
 import TimePickerComponent from "./components/time-picker-component/TimePickerComponent.vue";
 import TextAreaComponent from "./components/textarea-component/TextAreaComponent.vue";
 import SliderComponent from "./components/slider-component/SliderComponent.vue";
-// import CalendarComponent from "./components/calendar-component/CalendarComponent.vue";
+import CalendarComponent from "./components/calendar-component/CalendarComponent.vue";
 import CheckBoxSliderComponent from "./components/checkbox-slider-component/CheckBoxSliderComponent.vue";
 
 export {
@@ -16,6 +16,6 @@ export {
   TimePickerComponent,
   TextAreaComponent,
   SliderComponent,
-  // CalendarComponent,
+  CalendarComponent,
   CheckBoxSliderComponent,
 };
