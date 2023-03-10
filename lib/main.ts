@@ -9,6 +9,7 @@ import CalendarComponent from "./components/calendar-component/CalendarComponent
 import CheckBoxSliderComponent from "./components/checkbox-slider-component/CheckBoxSliderComponent.vue";
 
 export {
+  InputComponent,
   DropdownComponent,
   InputComponentWithSuggestions,
   InputDateComponent,
@@ -18,5 +19,3 @@ export {
   CalendarComponent,
   CheckBoxSliderComponent,
 };
-
-export default InputComponent;
