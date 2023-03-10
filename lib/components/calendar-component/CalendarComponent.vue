@@ -300,6 +300,7 @@ function monthClick(flag: number) {
 }
 
 function pickDate(index: number) {
+  if (date.value[index].status.includes("date-disabled")) return;
   now.value = date.value[index].time.set({ hour: 7, minute: 0 });
   emit("update:modelValue", now.value);
   show.value = false;

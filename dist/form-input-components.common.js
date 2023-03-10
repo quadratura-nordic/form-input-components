@@ -1502,7 +1502,7 @@ $({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
 
 /***/ }),
 
-/***/ 8600:
+/***/ 3679:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4284,19 +4284,19 @@ var __WEBPACK_AMD_DEFINE_RESULT__;__webpack_require__(7658);
 
 /***/ }),
 
-/***/ 990:
+/***/ 619:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8600);
+var content = __webpack_require__(3679);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.id, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = (__webpack_require__(7037)/* ["default"] */ .Z)
-var update = add("217de808", content, true, {"sourceMap":false,"shadowMode":false});
+var update = add("230cf9bf", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
@@ -13365,6 +13365,7 @@ const CalendarComponentvue_type_script_setup_true_lang_ts_hoisted_5 = ["onClick"
       });
     }
     function pickDate(index) {
+      if (date.value[index].status.includes("date-disabled")) return;
       now.value = date.value[index].time.set({
         hour: 7,
         minute: 0
@@ -13445,9 +13446,9 @@ const CalendarComponentvue_type_script_setup_true_lang_ts_hoisted_5 = ["onClick"
 }));
 ;// CONCATENATED MODULE: ./lib/components/calendar-component/CalendarComponent.vue?vue&type=script&setup=true&lang=ts
  
-// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[4]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./lib/components/calendar-component/CalendarComponent.vue?vue&type=style&index=0&id=3c9c1144&lang=scss
-var CalendarComponentvue_type_style_index_0_id_3c9c1144_lang_scss = __webpack_require__(990);
-;// CONCATENATED MODULE: ./lib/components/calendar-component/CalendarComponent.vue?vue&type=style&index=0&id=3c9c1144&lang=scss
+// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js??clonedRuleSet-22.use[0]!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[4]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./lib/components/calendar-component/CalendarComponent.vue?vue&type=style&index=0&id=73821ab9&lang=scss
+var CalendarComponentvue_type_style_index_0_id_73821ab9_lang_scss = __webpack_require__(619);
+;// CONCATENATED MODULE: ./lib/components/calendar-component/CalendarComponent.vue?vue&type=style&index=0&id=73821ab9&lang=scss
 
 ;// CONCATENATED MODULE: ./lib/components/calendar-component/CalendarComponent.vue
 
