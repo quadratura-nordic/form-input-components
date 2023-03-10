@@ -26,7 +26,7 @@
   "description": "Form input components for Vue 3",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name form-input-components lib/main.ts & tsc --emitDeclarationOnly ",
+    "build": "vue-cli-service build --target lib --name form-input-components lib/main.ts & vue-tsc --emitDeclarationOnly ",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

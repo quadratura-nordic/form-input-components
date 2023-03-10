@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div
     class="calendar-component"
     :class="{
@@ -53,7 +53,7 @@ import InputComponent from "../input-component/InputComponent.vue";
 import QDateTime from "./QDateTime";
 import type { DateTime } from "./QDateTime";
 import DropdownComponent from "../dropdown-component/DropdownComponent.vue";
-
+import type { WritableComputedRef } from "vue";
 type mapType = {
   YYYY: number;
   MMM: string;
@@ -171,7 +171,7 @@ const selectedYear = computed({
     now.value = now.value.set({ year: value });
   },
 });
-const value = computed({
+const value: WritableComputedRef<DateTime | null | undefined> = computed({
   get() {
     return props.modelValue;
   },
@@ -208,7 +208,7 @@ const selectedMonth = computed({
 });
 
 onMounted(() => {
-  if (value.value?.toString() == "Invalid DateTime") {
+  if (value.value  && value.value.toString() == "Invalid DateTime") {
     now.value = QDateTime.locationTime();
   } else {
     if (value.value) {
@@ -494,4 +494,4 @@ function stringify(time = now.value, format = props.format) {
     }
   }
 }
-</style>
+</style> -->

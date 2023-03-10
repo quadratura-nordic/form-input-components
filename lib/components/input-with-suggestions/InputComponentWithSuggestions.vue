@@ -45,7 +45,7 @@ const upSideDown = ref(false);
 const dropdownComponent = ref<HTMLElement | null>();
 
 const value = computed({
-  get(): any {
+  get() {
     return inputValue.value;
   },
   set(val) {
@@ -55,7 +55,7 @@ const value = computed({
 });
 
 let inputValue = computed({
-  get(): any {
+  get() {
     return props.modelValue;
   },
   set(val) {
@@ -70,7 +70,9 @@ const filteredOptions = computed(() => {
   if (inputValue.value) {
     return props.suggestions.filter((suggestion) => {
       if (typeof suggestion === "string") {
-        return suggestion.toLowerCase().includes(inputValue.value.toLowerCase());
+        if (inputValue.value && typeof inputValue.value === "string") {
+          return suggestion.toLowerCase().includes(inputValue.value.toLowerCase());
+        }
       }
     });
   }
