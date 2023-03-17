@@ -15,3 +15,4 @@ export default class QDateTime {
     static parse(value: string): DateTime;
     static parseTimestamp(value: number): DateTime;
 }
+//# sourceMappingURL=QDateTime.d.ts.map

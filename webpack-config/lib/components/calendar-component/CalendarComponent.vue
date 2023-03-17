@@ -208,7 +208,7 @@ const selectedMonth = computed({
 });
 
 onMounted(() => {
-  if (value.value && value.value.toString() == "Invalid DateTime") {
+  if (value.value  && value.value.toString() == "Invalid DateTime") {
     now.value = QDateTime.locationTime();
   } else {
     if (value.value) {

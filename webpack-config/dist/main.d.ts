@@ -8,3 +8,4 @@ import SliderComponent from "./components/slider-component/SliderComponent.vue";
 import CalendarComponent from "./components/calendar-component/CalendarComponent.vue";
 import CheckBoxSliderComponent from "./components/checkbox-slider-component/CheckBoxSliderComponent.vue";
 export { InputComponent, DropdownComponent, InputComponentWithSuggestions, InputDateComponent, TimePickerComponent, TextAreaComponent, SliderComponent, CalendarComponent, CheckBoxSliderComponent, };
+//# sourceMappingURL=main.d.ts.map

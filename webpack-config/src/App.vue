@@ -317,6 +317,7 @@ const dropdownOptions = ref([
 ]);
 const suggestions = ref(["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]);
 const errorPreview = ref(true);
+
 </script>
 
 <style scoped lang="scss">
