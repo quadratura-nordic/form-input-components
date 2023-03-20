@@ -13,7 +13,9 @@
     ".": {
       "import": "./dist/form-input-components.js",
       "require": "./dist/form-input-components.umd.js"
-    }
+    },
+    "./dist/modern.css": "./dist/modern.css",
+    "./dist/fullBorder.css": "./dist/fullBorder.css"
   },
   "repository": {
     "type": "git",
