@@ -1,0 +1,47 @@
+.input-component {
+  &.is-invalid {
+    input {
+      border: 1px solid transparent;
+      border-bottom: 1px solid var(--error-color);
+      &:focus {
+        border: 1px solid transparent;
+        border-bottom: 1px solid var(--error-color);
+      }
+    }
+  }
+  &.read-only-input-disabled-movement {
+    input:not(:placeholder-shown) + label,
+    input:focus + label {
+      transform: translate(-5px, 8px) scale(1);
+    }
+  }
+  input {
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--secondary-color);
+    border-radius: 0;
+    padding: 10px 40px 5px 10px;
+
+    &:focus,
+    &:hover {
+      cursor: pointer;
+      border: none;
+      border: 1px solid transparent;
+    }
+
+    &:hover {
+      border-bottom: 1px solid var(--hover-color);
+    }
+    &:focus {
+      border-bottom: 1px solid var(--primary-color);
+    }
+  }
+
+  input:placeholder-shown + label {
+    transform: translate(-5px, 8px) scale(1);
+  }
+
+  input:not(:placeholder-shown) + label,
+  input:focus + label {
+    transform: translate(-5px, -15px) scale(1);
+  }
+}

@@ -8,6 +8,8 @@ import SliderComponent from "./components/slider-component/SliderComponent.vue";
 import CalendarComponent from "./components/calendar-component/CalendarComponent.vue";
 import CheckBoxSliderComponent from "./components/checkbox-slider-component/CheckBoxSliderComponent.vue";
 
+const themes = [import("./themes/fullBorder"), import("./themes/modern")];
+
 export {
   InputComponent,
   DropdownComponent,

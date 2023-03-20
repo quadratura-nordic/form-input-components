@@ -1,0 +1,22 @@
+.calendar-component {
+  &.is-invalid {
+    .input-component {
+      input {
+        border: 1px solid transparent;
+        border-bottom: 1px solid var(--error-color);
+        &:focus {
+          border: 1px solid transparent;
+          border-bottom: 1px solid var(--error-color);
+        }
+      }
+    }
+  }
+
+  &.calendar-component-opened {
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+    }
+  }
+}

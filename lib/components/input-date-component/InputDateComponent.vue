@@ -130,60 +130,19 @@ function updateValue() {
 }
 </script>
 
-<style lang="scss">
-.date-input-component {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
+<script lang="ts">
+import styles from "./_inputDateComponent.scss?inline";
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  --black-color: #000000;
-  --error-color: #ff6565;
-
-  &.is-invalid {
-    .date-input-component-title {
-      color: var(--error-color);
-    }
-    .input-component {
-      input {
-        border: 1px solid var(--error-color);
-
-        &:focus {
-          border: 1px solid var(--error-color);
-        }
-      }
-      label {
-        color: var(--error-color);
-      }
-      input:focus + label {
-        color: var(--error-color);
-      }
-      input:not(:placeholder-shown) + label {
-        color: var(--error-color);
-      }
-    }
-  }
-
-  .date-input-component-title {
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 22px;
-    color: var(--black-color);
-  }
-  .date-input-components {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    width: 100%;
-    .input-component {
-      width: calc(100% / 3 - 10px);
-    }
-  }
+function injectCss(css: string) {
+  const style = document.createElement("style");
+  style.setAttribute("type", "text/css");
+  style.setAttribute("id", "styles-input-date-component");
+  document.head.firstChild
+    ? document.head.insertBefore(style, document.head.firstChild)
+    : document.head.appendChild(style);
+  style.appendChild(document.createTextNode(css));
+  return css;
 }
-</style>
+
+injectCss(styles);
+</script>

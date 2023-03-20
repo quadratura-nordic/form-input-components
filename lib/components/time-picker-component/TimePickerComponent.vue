@@ -131,112 +131,19 @@ function heightCalculation() {
 }
 </script>
 
-<style lang="scss">
-.time-picker-component {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  .time-picker-dropdowns {
-    display: flex;
-    position: absolute;
-    top: 40px;
-    width: 100%;
-    .time-picker-dropdown-component {
-      width: 50%;
-      &:first-child {
-        ul {
-          border-radius: 0 0 0 8px;
-        }
-      }
-      &:last-child {
-        ul {
-          border-radius: 0 0 8px 0;
-        }
-      }
-    }
-  }
-  &.time-picker-component-opened {
-    .input-component {
-      input {
-        border-radius: 8px 8px 0 0;
-      }
-    }
-  }
-  &.time-picker-component-up-side-down {
-    .time-picker-dropdowns {
-      top: auto;
-      bottom: 40px;
-      .time-picker-dropdown-component {
-        &:first-child {
-          .time-picker-dropdown-component-title {
-            border-radius: 8px 0 0 0;
-          }
-          ul {
-            border-radius: 0 0 0 0;
-          }
-        }
-        &:last-child {
-          .time-picker-dropdown-component-title {
-            border-radius: 0 8px 0 0;
-          }
-          ul {
-            border-radius: 0 0 0 0;
-          }
-        }
-      }
-    }
-    .input-component {
-      input {
-        border-radius: 0 0 8px 8px;
-      }
-      input:not(:placeholder-shown) + label,
-      input:focus + label {
-        transform: translate(10px, 25px) scale(1);
-      }
-    }
-  }
+<script lang="ts">
+import styles from "./_timePickerComponent.scss?inline";
 
-  &.is-invalid {
-    .time-picker-dropdowns {
-      .time-picker-dropdown-component {
-        &:first-child {
-          .time-picker-dropdown-component-title {
-            border-left: 1px solid var(--error-color);
-          }
-          ul {
-            border-left: 1px solid var(--error-color);
-            border-bottom: 1px solid var(--error-color);
-          }
-        }
-        &:last-child {
-          .time-picker-dropdown-component-title {
-            border-right: 1px solid var(--error-color);
-          }
-          ul {
-            border-right: 1px solid var(--error-color);
-            border-bottom: 1px solid var(--error-color);
-          }
-        }
-      }
-    }
-    .input-component {
-      input {
-        border: 1px solid var(--error-color);
-
-        &:focus {
-          border: 1px solid var(--error-color);
-        }
-      }
-      label {
-        color: var(--error-color);
-      }
-      input:focus + label {
-        color: var(--error-color);
-      }
-      input:not(:placeholder-shown) + label {
-        color: var(--error-color);
-      }
-    }
-  }
+function injectCss(css: string) {
+  const style = document.createElement("style");
+  style.setAttribute("type", "text/css");
+  style.setAttribute("id", "styles-time-picker-component");
+  document.head.firstChild
+    ? document.head.insertBefore(style, document.head.firstChild)
+    : document.head.appendChild(style);
+  style.appendChild(document.createTextNode(css));
+  return css;
 }
-</style>
+
+injectCss(styles);
+</script>

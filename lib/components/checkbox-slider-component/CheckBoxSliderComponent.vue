@@ -36,104 +36,19 @@ const val = computed({
 });
 </script>
 
-<style lang="scss">
-.checkbox-slider {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  width: auto;
-  user-select: none;
+<script lang="ts">
+import styles from "./_checkboxSliderComponent.scss?inline";
 
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-
-  --error-color: #ff6565;
-  --primary-color: #1a2c51;
-  --secondary-color: #8d96a8;
-  --hover-color: #223a6b;
-  --black-color: #000;
-  --white-color: #fff;
-  --green-color: #7cd920;
-  .checkbox-switch {
-    position: relative;
-    display: inline-flex;
-    width: 40px;
-    height: 18px;
-
-    cursor: pointer;
-
-    &:hover {
-      cursor: pointer;
-      opacity: 0.7;
-    }
-
-    label {
-      display: flex;
-      vertical-align: middle;
-      justify-content: flex-start;
-      position: relative;
-      display: inline-block;
-      width: 40px;
-      height: 18px;
-      cursor: pointer;
-    }
-    input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: var(--secondary-color);
-      transition: 0.4s;
-      border-radius: 40px;
-      &:before {
-        position: absolute;
-        content: "";
-        height: 10px;
-        width: 10px;
-        border-radius: 18px;
-        left: 5px;
-        bottom: 4px;
-        background-color: var(--white-color);
-        transition: 0.25s;
-      }
-    }
-
-    input:checked + .slider {
-      background-color: var(--green-color);
-      &:before {
-        transform: translateX(20px);
-      }
-    }
-  }
-
-  .checkbox-slider-label {
-    font-size: 15px;
-    line-height: 140%;
-    padding-top: 2px;
-    color: var(--black-color);
-    cursor: pointer;
-  }
-  &.is-invalid {
-    .checkbox-switch {
-      .slider {
-        background-color: var(--error-color);
-      }
-    }
-    .checkbox-slider-label {
-      color: var(--error-color);
-    }
-  }
+function injectCss(css: string) {
+  const style = document.createElement("style");
+  style.setAttribute("type", "text/css");
+  style.setAttribute("id", "styles-checkbox-slider-component");
+  document.head.firstChild
+    ? document.head.insertBefore(style, document.head.firstChild)
+    : document.head.appendChild(style);
+  style.appendChild(document.createTextNode(css));
+  return css;
 }
-</style>
+
+injectCss(styles);
+</script>

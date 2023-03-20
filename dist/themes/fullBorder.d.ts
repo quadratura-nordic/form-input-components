@@ -1,0 +1,1 @@
+import "./fullBorder.scss";

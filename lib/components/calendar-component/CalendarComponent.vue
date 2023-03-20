@@ -292,9 +292,6 @@ function update() {
   date.value = arr;
 }
 
-// function yearClick(flag: number) {
-//   now.value = now.value.set({ year: now.value.year + flag });
-// }
 function monthClick(flag: number) {
   now.value = now.value.set({ month: now.value.month + flag });
 }
@@ -330,168 +327,19 @@ function stringify(time = now.value, format = props.format) {
 }
 </script>
 
-<style lang="scss">
-.calendar-component {
-  position: relative;
-  display: flex;
+<script lang="ts">
+import styles from "./_calendarComponent.scss?inline";
 
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-
-  --error-color: #ff6565;
-  --primary-color: #1a2c51;
-  --secondary-color: #8d96a8;
-  --hover-color: #223a6b;
-  --black-color: #000;
-  --white-color: #fff;
-
-  &.is-invalid {
-    .input-component {
-      input {
-        border: 1px solid var(--error-color);
-
-        &:focus {
-          border: 1px solid var(--error-color);
-        }
-      }
-      label {
-        color: var(--error-color);
-      }
-      input:focus + label {
-        color: var(--error-color);
-      }
-      input:not(:placeholder-shown) + label {
-        color: var(--error-color);
-      }
-    }
-    .calendar-container {
-      border: 1px solid var(--error-color);
-      border-top: none 0;
-    }
-  }
-
-  &.calendar-component-opened {
-    .input-component {
-      input {
-        border-radius: 8px 8px 0 0;
-      }
-    }
-  }
-
-  .calendar-container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    z-index: 10;
-    background-color: var(--white-color);
-    border: 1px solid var(--secondary-color);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    position: absolute;
-    top: 40px;
-    // box-shadow: 0px 0px 110px rgb(0 0 0 / 17%);
-    .calendar-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      width: 100%;
-      gap: 20px;
-      .date-text {
-        width: 150px;
-        text-align: center;
-      }
-      .calendar-arrow {
-        width: 11px;
-        height: 18px;
-        display: block;
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        &.left {
-          background: url("./calendarIcons.svg") -0 -18px;
-        }
-        &.right {
-          background: url("./calendarIcons.svg")-0 -0rem;
-        }
-        &:hover {
-          cursor: pointer;
-          opacity: 0.7;
-        }
-      }
-    }
-    .calendar-days {
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      width: 100%;
-      border-top: 1px solid var(--secondary-color);
-      height: 49.5px;
-
-      &.day-names {
-        border-top: none;
-      }
-
-      .calendar-day {
-        width: calc(100% / 7);
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-right: 1px solid var(--secondary-color);
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 12px;
-        color: var(--black-color);
-        &:nth-child(7n) {
-          border-right: none;
-        }
-        &:hover {
-          cursor: pointer;
-          background-color: var(--secondary-color);
-          color: var(--white-color);
-        }
-        &.date-pass,
-        &.date-future {
-          color: var(--secondary-color);
-          &:hover {
-            color: var(--white-color);
-          }
-        }
-
-        &.date-disabled {
-          color: var(--secondary-color);
-          &:hover {
-            color: var(--secondary-color);
-            cursor: not-allowed;
-            background-color: var(--white-color);
-          }
-        }
-        &.date-active,
-        &.date-current {
-          background-color: var(--primary-color);
-          color: var(--white-color);
-          &:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-          }
-        }
-
-        &.day-name {
-          border-right: none;
-          &:hover {
-            cursor: default;
-            background-color: var(--white-color);
-            color: var(--black-color);
-          }
-        }
-      }
-    }
-  }
+function injectCss(css: string) {
+  const style = document.createElement("style");
+  style.setAttribute("type", "text/css");
+  style.setAttribute("id", "styles-calendar-component");
+  document.head.firstChild
+    ? document.head.insertBefore(style, document.head.firstChild)
+    : document.head.appendChild(style);
+  style.appendChild(document.createTextNode(css));
+  return css;
 }
-</style>
+
+injectCss(styles);
+</script>

@@ -1,0 +1,50 @@
+.time-picker-component {
+  .time-picker-dropdowns {
+    top: 65px;
+
+    .time-picker-dropdown-component {
+      &:first-child {
+        ul {
+          border-radius: 0;
+        }
+      }
+      &:last-child {
+        ul {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+  &.time-picker-component-opened {
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+    }
+  }
+  &.time-picker-component-up-side-down {
+    .time-picker-dropdowns {
+      .time-picker-dropdown-component {
+        &:first-child {
+          .time-picker-dropdown-component-title {
+            border-radius: 0;
+          }
+        }
+        &:last-child {
+          .time-picker-dropdown-component-title {
+            border-radius: 0;
+          }
+        }
+      }
+    }
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+      input:not(:placeholder-shown) + label,
+      input:focus + label {
+        transform: translate(0px, 65px) scale(1);
+      }
+    }
+  }
+}

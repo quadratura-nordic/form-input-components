@@ -19,52 +19,6 @@
     </div>
 
     <div class="form-input-box">
-      <p class="form-input-box-title">Input Component Border Bottom</p>
-      <InputComponent v-model="firstName" :placeHolder="'First Name'" class="input-component-border-bottom" />
-      <p class="form-input-box-title">Input Component Border Bottom Disabled</p>
-      <InputComponent
-        v-model="firstName"
-        :placeHolder="'First Name'"
-        class="input-component-border-bottom"
-        :read-only="true"
-      />
-      <p class="form-input-box-title">Input Component Border Bottom Error</p>
-      <InputComponent
-        v-model="firstName"
-        :placeHolder="'First Name'"
-        class="input-component-border-bottom"
-        :errorMessage="errorPreview ? 'Required' : ''"
-        :class="{
-          'is-invalid': true,
-        }"
-      />
-      <p class="form-input-value">Value: {{ firstName }}</p>
-    </div>
-
-    <div class="form-input-box">
-      <p class="form-input-box-title">Input Component Full Border</p>
-      <InputComponent v-model="firstName" :placeHolder="'First Name'" class="input-component-full-border" />
-      <p class="form-input-box-title">Input Component Full Border Disabled</p>
-      <InputComponent
-        v-model="firstName"
-        :placeHolder="'First Name'"
-        class="input-component-full-border"
-        :read-only="true"
-      />
-      <p class="form-input-box-title">Input Component Full Border Error</p>
-      <InputComponent
-        v-model="firstName"
-        :placeHolder="'First Name'"
-        class="input-component-full-border"
-        :errorMessage="errorPreview ? 'Required' : ''"
-        :class="{
-          'is-invalid': true,
-        }"
-      />
-      <p class="form-input-value">Value: {{ firstName }}</p>
-    </div>
-
-    <div class="form-input-box">
       <p class="form-input-box-title">TextArea Component No Resize</p>
       <TextAreaComponent v-model="textAreaValue" :should-resize="false" :placeHolder="'TextArea'" />
 

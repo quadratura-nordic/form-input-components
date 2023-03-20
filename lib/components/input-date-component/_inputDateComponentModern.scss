@@ -1,0 +1,17 @@
+.date-input-component {
+  &.is-invalid {
+    .date-input-component-title {
+      color: var(--error-color);
+    }
+    .input-component {
+      input {
+        border: 1px solid transparent;
+        border-bottom: 1px solid var(--error-color);
+        &:focus {
+          border: 1px solid transparent;
+          border-bottom: 1px solid var(--error-color);
+        }
+      }
+    }
+  }
+}

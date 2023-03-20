@@ -1,0 +1,33 @@
+.time-picker-component {
+  &.time-picker-component-opened {
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+    }
+  }
+  &.time-picker-component-up-side-down {
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+      input:not(:placeholder-shown) + label,
+      input:focus + label {
+        transform: translate(0px, 35px) scale(1);
+      }
+    }
+  }
+
+  &.is-invalid {
+    .input-component {
+      input {
+        border: 1px solid transparent;
+        border-bottom: 1px solid var(--error-color);
+        &:focus {
+          border: 1px solid transparent;
+          border-bottom: 1px solid var(--error-color);
+        }
+      }
+    }
+  }
+}

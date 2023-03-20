@@ -198,63 +198,19 @@ function setCurrentPosition(value: number) {
 }
 </script>
 
-<style lang="scss">
-.slider-component {
-  width: 100%;
+<script lang="ts">
+import styles from "./_sliderComponent.scss?inline";
 
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-
-  --error-color: #ff6565;
-  --primary-color: #1a2c51;
-  --secondary-color: #8d96a8;
-  --hover-color: #223a6b;
-  --black-color: #000;
-  --white-color: #fff;
-
-  .slider {
-    height: 2px;
-    background: var(--secondary-color);
-    cursor: pointer;
-    position: relative;
-    .slider-start {
-      position: absolute;
-      left: 0;
-      background-color: var(--primary-color);
-      height: 2px;
-      top: 0;
-    }
-    .slider-dot {
-      background: var(--primary-color);
-      height: 16px;
-      width: 40px;
-      border-radius: 20px;
-      position: absolute;
-      top: -7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .slider-display-value {
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 100%;
-        color: var(--white-color);
-      }
-    }
-  }
-  &.is-invalid {
-    .slider {
-      .slider-start {
-        background-color: var(--error-color);
-      }
-      .slider-dot {
-        background: var(--error-color);
-      }
-    }
-  }
+function injectCss(css: string) {
+  const style = document.createElement("style");
+  style.setAttribute("type", "text/css");
+  style.setAttribute("id", "styles-slider-component");
+  document.head.firstChild
+    ? document.head.insertBefore(style, document.head.firstChild)
+    : document.head.appendChild(style);
+  style.appendChild(document.createTextNode(css));
+  return css;
 }
-</style>
+
+injectCss(styles);
+</script>

@@ -1,0 +1,40 @@
+.input-with-suggestions-component {
+  &.is-invalid {
+    .input-with-suggestions-component-list {
+      border: 1px solid var(--error-color);
+      border-top: 0 none;
+    }
+    &.input-with-suggestions-component-upside-down {
+      .input-with-suggestions-component-list {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &.input-with-suggestions-component-opened {
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+    }
+  }
+  &.input-with-suggestions-component-upside-down {
+    .input-with-suggestions-component-list {
+      border-radius: 0;
+    }
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+      input:not(:placeholder-shown) + label,
+      input:focus + label {
+        transform: translate(0px, 65px) scale(1);
+      }
+    }
+  }
+
+  .input-with-suggestions-component-list {
+    border-radius: 0;
+    top: 65px;
+  }
+}

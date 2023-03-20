@@ -1,0 +1,17 @@
+.calendar-component {
+  &.calendar-component-opened {
+    .input-component {
+      input {
+        border-radius: 0;
+      }
+    }
+  }
+
+  .calendar-container {
+    border-radius: 0;
+    top: 65px;
+    .calendar-header {
+      padding: 25px 10px;
+    }
+  }
+}

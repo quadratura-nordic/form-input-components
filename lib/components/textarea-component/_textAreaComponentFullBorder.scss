@@ -1,0 +1,36 @@
+.textarea-component {
+  height: auto;
+  gap: 10px;
+
+  textarea {
+    height: 42px;
+    border: 1px solid var(--black-color);
+    border-radius: 0px;
+  }
+
+  label {
+    display: inline-flex;
+    color: var(--black-color);
+    background-color: transparent;
+    padding: 0px;
+    position: relative;
+  }
+
+  textarea:placeholder-shown + label {
+    transform: translate(0px, -2.5px) scale(1);
+  }
+
+  textarea:not(:placeholder-shown) + label,
+  textarea:focus + label {
+    color: var(--black-color);
+    font-size: 15px;
+    transform: translate(0px, -2.5px) scale(1);
+  }
+
+  &.read-only-textarea-disabled-movement {
+    textarea:not(:placeholder-shown) + label,
+    textarea:focus + label {
+      transform: translate(0px, -2.5px) scale(1);
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.input-component {
+  height: auto;
+  gap: 10px;
+
+  .clear-input {
+    bottom: 0;
+    height: 40px;
+  }
+
+  input {
+    height: 40px;
+    border: 1px solid var(--black-color);
+    border-radius: 0px;
+  }
+
+  label {
+    display: inline-flex;
+    color: var(--black-color);
+    background-color: transparent;
+    padding: 0px;
+    position: relative;
+  }
+
+  input:placeholder-shown + label {
+    transform: translate(0px, -2.5px) scale(1);
+  }
+
+  input:not(:placeholder-shown) + label,
+  input:focus + label {
+    color: var(--black-color);
+    font-size: 15px;
+    transform: translate(0px, -2.5px) scale(1);
+  }
+
+  &.read-only-input-disabled-movement {
+    input:not(:placeholder-shown) + label,
+    input:focus + label {
+      color: var(--black-color);
+      transform: translate(0px, -2.5px) scale(1);
+    }
+  }
+}

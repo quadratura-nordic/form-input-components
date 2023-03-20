@@ -1,24 +1,28 @@
+import { fileURLToPath, URL } from "node:url";
+
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
-// https://vitejs.dev/config/
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import path from "path";
+
 export default defineConfig({
-  plugins: [vue(), cssInjectedByJsPlugin()],
+  plugins: [vue(), vueJsx()],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./lib", import.meta.url)),
+    },
+  },
   build: {
+    cssCodeSplit: true,
     outDir: "dist",
     lib: {
-      entry: resolve(__dirname, "lib/main.ts"),
+      entry: path.resolve(__dirname, "lib/main.ts"),
       name: "form-input-components",
       fileName: "form-input-components",
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: ["vue"],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
         globals: {
           vue: "Vue",
         },

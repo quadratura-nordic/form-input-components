@@ -1,0 +1,138 @@
+.input-with-suggestions-component {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+
+  --error-color: #ff6565;
+  --primary-color: #1a2c51;
+  --secondary-color: #8d96a8;
+  --hover-color: #223a6b;
+  --black-color: #000;
+  --white-color: #fff;
+
+  * {
+    box-sizing: border-box;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    left: -99999px;
+  }
+  &.is-invalid {
+    .input-with-suggestions-component-list {
+      border: 1px solid var(--error-color);
+      border-top: 0 none;
+    }
+    .input-component {
+      input {
+        border: 1px solid var(--error-color);
+
+        &:focus {
+          border: 1px solid var(--error-color);
+        }
+      }
+      label {
+        color: var(--error-color);
+      }
+      input:focus + label {
+        color: var(--error-color);
+      }
+      input:not(:placeholder-shown) + label {
+        color: var(--error-color);
+      }
+    }
+    &.input-with-suggestions-component-upside-down {
+      .input-with-suggestions-component-list {
+        border-top: 1px solid var(--error-color);
+      }
+    }
+  }
+
+  &.input-with-suggestions-component-opened {
+    .input-component {
+      input {
+        border-radius: 8px 8px 0 0;
+      }
+    }
+  }
+  &.input-with-suggestions-component-upside-down {
+    .input-with-suggestions-component-list {
+      top: auto;
+      bottom: 40px;
+      flex-direction: column-reverse;
+      border-radius: 8px 8px 0 0;
+      border-top: 1px solid var(--secondary-color);
+      border-bottom: none;
+      li {
+        border-bottom: none;
+        border-top: 1px solid var(--secondary-color);
+
+        &:last-child {
+          border-top: none;
+        }
+      }
+    }
+    .input-component {
+      input {
+        border-radius: 0 0 8px 8px;
+      }
+      input:not(:placeholder-shown) + label,
+      input:focus + label {
+        transform: translate(10px, 25px) scale(1);
+      }
+    }
+  }
+
+  .input-with-suggestions-component-list {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white-color);
+    border-radius: 0 0 8px 8px;
+    height: auto;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    border: 1px solid var(--secondary-color);
+    border-top: none;
+    z-index: 6;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    overflow-y: auto;
+    padding: 0 10px;
+    max-height: 40vh;
+
+    li {
+      height: 40px;
+      border-bottom: 1px solid var(--secondary-color);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      &:last-child {
+        border-bottom: none;
+      }
+
+      label {
+        display: inline-block;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 22px;
+        color: var(--black-color);
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 10px 0;
+        height: 100%;
+        &:hover {
+          cursor: pointer;
+          color: var(--hover-color);
+        }
+      }
+    }
+  }
+}

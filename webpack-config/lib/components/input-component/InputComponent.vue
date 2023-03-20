@@ -196,10 +196,10 @@ defineExpose({ focusInput });
       outline: none;
     }
     &:hover {
-      border: 0.01rem solid var(--hover-color);
+      border: 1px solid var(--hover-color);
     }
     &:focus {
-      border: 0.01rem solid var(--primary-color);
+      border: 1px solid var(--primary-color);
     }
 
     &:read-only {
