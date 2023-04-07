@@ -39,6 +39,10 @@
         <InputComponent ref="inputComponent" v-model="searchValue" placeHolder="Search" />
       </div>
       <ul>
+        <li v-if="!multiSelect && deselectAvailable">
+          <input type="radio" :value="null" id="deselect_option" v-model="value" />
+          <label for="deselect_option">{{ deselectPlaceHolder }}</label>
+        </li>
         <li v-for="(option, index) in filteredOptions" :key="index">
           <div class="checkbox" v-if="multiSelect">
             <input type="checkbox" :value="option" :id="valueFunction(option) + '_' + index" v-model="value" />
@@ -86,6 +90,8 @@ const props = withDefaults(
     valueFunction?: (option: Option) => string;
     multiSelect?: boolean;
     searchBox?: boolean;
+    deselectAvailable?: boolean;
+    deselectPlaceHolder?: string;
   }>(),
   {
     displayFunction: (option: any) => {
@@ -97,6 +103,8 @@ const props = withDefaults(
     placeHolder: "Please select",
     multiSelect: false,
     searchBox: false,
+    deselectAvailable: false,
+    deselectPlaceHolder: "De select",
   }
 );
 
@@ -130,6 +138,9 @@ const value = computed({
         emit("update:modelValue", props.valueFunction(val));
         close();
       }
+    } else if (props.deselectAvailable && !props.multiSelect && val === null) {
+      emit("update:modelValue", val);
+      close();
     }
   },
 });

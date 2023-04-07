@@ -3,6 +3,7 @@
     class="input-component"
     :class="{
       'read-only-input-disabled-movement': readOnly && !modelValue,
+      'input-component-without-clear-button': hideClearButton,
     }"
   >
     <input
@@ -12,11 +13,18 @@
       v-model="val"
       :readonly="readOnly"
       ref="inputComponent"
+      :min="minInput"
+      :max="maxInput"
     />
     <label :for="'input' + id"
       >{{ placeHolder }} <template v-if="errorMessage">- {{ errorMessage }}</template></label
     >
-    <div class="clear-input" v-if="!readOnly" :class="{ show: modelValue }" @click="clearModelValue"></div>
+    <div
+      class="clear-input"
+      v-if="!readOnly && !hideClearButton"
+      :class="{ show: modelValue }"
+      @click="clearModelValue"
+    ></div>
   </div>
 </template>
 <script setup lang="ts">
@@ -32,6 +40,9 @@ const props = withDefaults(
     errorMessage?: string;
     modelValue?: unknown;
     readOnly?: boolean;
+    minInput?: number;
+    maxInput?: number;
+    hideClearButton?: boolean;
   }>(),
   {
     inputType: "text",

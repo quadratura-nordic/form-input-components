@@ -26,6 +26,12 @@
     }
   }
 
+  &.input-component-without-clear-button{
+    input{
+      padding-right: 15px;
+    }
+  }
+
   &.is-invalid {
     input {
       border: 1px solid var(--error-color);
@@ -119,7 +125,7 @@
     }
 
     &:read-only {
-      padding-right: 0;
+      padding-right: 15px;
     }
   }
 
