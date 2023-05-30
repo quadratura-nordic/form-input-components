@@ -268,7 +268,24 @@ const dropdownOptions = ref([
     value: "4",
     name: "Option 4",
   },
+  {
+    value: "5",
+    name: "Option 5",
+  },
+  {
+    value: "6",
+    name: "Option 6",
+  },
+  {
+    value: "7",
+    name: "Option 7",
+  },
+  {
+    value: "8",
+    name: "Option 8",
+  },
 ]);
+
 const suggestions = ref(["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]);
 const errorPreview = ref(true);
 </script>

@@ -1,9 +1,10 @@
 <template>
-  <div class="dropdown-component">
+  <div class="dropdown-component" ref="dropdownComponent">
     <div
       class="dropdown-component-outside"
+      ref="dropdownComponentOutside"
       @click="open"
-      :class="{ 'up-side-down': upSideDown && opened, 'dropdown-list-opened': opened }"
+      :class="{ 'up-side-down': dropdownUpsideDown && opened, 'dropdown-list-opened': opened }"
     >
       <p class="dropdown-component-outside-text" v-if="multiSelect ? getMultiSelectNames() : value">
         {{ errorMessage ? placeHolder + " - " + errorMessage : placeHolder }}
@@ -32,8 +33,8 @@
       class="dropdown-component-opened"
       v-if="opened"
       v-click-outside="close"
-      ref="dropdownComponent"
-      :class="{ 'up-side-down': upSideDown }"
+      ref="dropdownComponentList"
+      :class="{ 'up-side-down': dropdownUpsideDown }"
     >
       <div class="search-box" v-if="searchBox">
         <InputComponent ref="inputComponent" v-model="searchValue" placeHolder="Search" />
@@ -68,7 +69,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { withDefaults, onMounted, computed, ref, nextTick, defineEmits, defineProps } from "vue";
+import { withDefaults, onMounted, computed, ref, nextTick, defineEmits, defineProps, onBeforeUnmount } from "vue";
 import InputComponent from "../input-component/InputComponent.vue";
 
 type Option =
@@ -109,10 +110,12 @@ const props = withDefaults(
 );
 
 const opened = ref(false);
-const upSideDown = ref(false);
-const dropdownComponent = ref<HTMLElement | null>();
+const dropdownUpsideDown = ref(false);
 const searchValue = ref("");
 const inputComponent = ref<typeof InputComponent | null>();
+const dropdownComponent = ref<HTMLElement | null>();
+const dropdownComponentList = ref<HTMLElement | null>();
+const dropdownComponentOutside = ref<HTMLElement | null>();
 
 const value = computed({
   get(): unknown | null {
@@ -159,6 +162,30 @@ const filteredOptions = computed(() => {
 
 onMounted(() => {
   checkLength();
+  window.addEventListener("resize", calculateDropdownPosition);
+
+  window.addEventListener(
+    "scroll",
+    (e) => {
+      if (
+        dropdownComponentList.value?.contains(e.target as Node) ||
+        dropdownComponent.value?.contains(e.target as Node)
+      ) {
+        return;
+      }
+
+      close();
+    },
+    true
+  );
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", calculateDropdownPosition);
+
+  window.removeEventListener("scroll", () => {
+    close();
+  });
 });
 
 function checkLength() {
@@ -176,7 +203,7 @@ function displaySelected() {
 
 function open() {
   opened.value = true;
-  heightCalculation();
+  calculateDropdownPosition();
   if (props.searchBox) {
     nextTick(() => {
       inputComponent.value?.focusInput();
@@ -185,24 +212,59 @@ function open() {
 }
 function close() {
   opened.value = false;
-  upSideDown.value = false;
+  dropdownUpsideDown.value = false;
   searchValue.value = "";
 }
-function heightCalculation() {
+
+function calculateDropdownPosition() {
   nextTick(() => {
-    const dropdown = dropdownComponent.value;
-    if (!dropdown) {
+    const dropdownComponentListPosition = dropdownComponentList.value?.getBoundingClientRect();
+    const dropdownPosition = dropdownComponent.value?.getBoundingClientRect();
+
+    if (!dropdownComponentListPosition || !dropdownPosition) {
       return;
     }
-    const dropdownHeight = dropdown.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const diffrence = windowHeight - dropdownHeight.bottom;
 
-    if (diffrence > 0) {
-      upSideDown.value = false;
-    } else {
-      upSideDown.value = true;
+    let top = dropdownPosition.bottom + "px";
+    const left = dropdownPosition.left + "px";
+    let bottom = "auto";
+
+    let parentElement = dropdownComponentList.value?.parentElement;
+    let height = 0;
+    while (parentElement) {
+      if (parentElement === document.body) {
+        height = window.innerHeight;
+        break;
+      }
+      if (parentElement.scrollHeight > parentElement.clientHeight) {
+        height = parentElement.getBoundingClientRect().bottom;
+        break;
+      }
+
+      parentElement = parentElement.parentElement;
     }
+
+    const spaceToBottom = height - dropdownPosition.bottom;
+
+    const spaceRequired = dropdownComponentListPosition.height;
+
+    if (spaceRequired <= spaceToBottom) {
+      dropdownUpsideDown.value = false;
+    } else {
+      dropdownUpsideDown.value = true;
+      top = "auto";
+      const spaceToBottom = window.innerHeight - dropdownPosition.bottom;
+      bottom = spaceToBottom + dropdownPosition.height + "px";
+    }
+
+    dropdownComponentList.value?.setAttribute(
+      "style",
+      `top: ${top};
+       left: ${left};
+        bottom: ${bottom};
+       width: ${dropdownPosition.width}px
+      `
+    );
   });
 }
 

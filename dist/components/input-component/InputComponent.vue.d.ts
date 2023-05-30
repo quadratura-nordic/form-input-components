@@ -4,6 +4,9 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     errorMessage?: string | undefined;
     modelValue?: unknown;
     readOnly?: boolean | undefined;
+    minInput?: number | undefined;
+    maxInput?: number | undefined;
+    hideClearButton?: boolean | undefined;
 }>, {
     inputType: string;
     readOnly: boolean;
@@ -15,6 +18,9 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     errorMessage?: string | undefined;
     modelValue?: unknown;
     readOnly?: boolean | undefined;
+    minInput?: number | undefined;
+    maxInput?: number | undefined;
+    hideClearButton?: boolean | undefined;
 }>, {
     inputType: string;
     readOnly: boolean;
