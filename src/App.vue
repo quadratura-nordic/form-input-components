@@ -284,6 +284,22 @@ const dropdownOptions = ref([
     value: "8",
     name: "Option 8",
   },
+  {
+    value: "9",
+    name: "Option 9",
+  },
+  {
+    value: "10",
+    name: "Option 10",
+  },
+  {
+    value: "11",
+    name: "Option 11",
+  },
+  {
+    value: "12",
+    name: "Option 12",
+  },
 ]);
 
 const suggestions = ref(["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]);
