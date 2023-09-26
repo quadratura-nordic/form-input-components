@@ -5,31 +5,29 @@
       'time-picker-component-opened': showDropdown,
       'time-picker-component-up-side-down': upSideDown,
     }"
-  >
+    ref="timePicker">
     <InputComponent
       :model-value="displayTime"
       @click="openDropdown"
       :read-only="true"
-      :place-holder="errorMessage ? placeHolder + ' - ' + errorMessage : placeHolder"
-    />
+      :place-holder="errorMessage ? placeHolder + ' - ' + errorMessage : placeHolder" />
     <div
       class="time-picker-dropdowns"
       ref="timePickerComponentDropdowns"
       v-click-outside="closeDropdown"
-      v-if="showDropdown"
-    >
+      v-if="showDropdown">
       <TimePickerDropdownComponent v-model="selectedHour" :options="hours" :place-holder="'HH'" />
       <TimePickerDropdownComponent v-model="selectedMinute" :options="minutes" :place-holder="'MM'" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { defineEmits, defineProps, withDefaults, nextTick, computed, ref } from "vue";
+import { defineEmits, onMounted, onBeforeUnmount, defineProps, withDefaults, nextTick, computed, ref } from 'vue';
 
-import InputComponent from "../input-component/InputComponent.vue";
-import TimePickerDropdownComponent from "./TimePickerDropdownComponent.vue";
+import InputComponent from '../input-component/InputComponent.vue';
+import TimePickerDropdownComponent from './TimePickerDropdownComponent.vue';
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const props = withDefaults(
   defineProps<{
@@ -43,12 +41,13 @@ const props = withDefaults(
   {
     timeTo: 24,
     timeFrom: 0,
-    placeHolder: "Please select",
+    placeHolder: 'Please select',
   }
 );
 
 const showDropdown = ref(false);
 const timePickerComponentDropdowns = ref<HTMLElement | null>();
+const timePicker = ref<HTMLElement | null>();
 const upSideDown = ref(false);
 
 const hours = computed(() => {
@@ -75,10 +74,10 @@ const minutes = computed(() => {
 
 const selectedHour = computed({
   get() {
-    return props.modelValue?.hour ?? "--";
+    return props.modelValue?.hour ?? '--';
   },
   set(value) {
-    emit("update:modelValue", {
+    emit('update:modelValue', {
       hour: value,
       minute: props.modelValue?.minute,
     });
@@ -86,9 +85,9 @@ const selectedHour = computed({
 });
 
 const selectedMinute = computed({
-  get: () => props.modelValue?.minute ?? "--",
+  get: () => props.modelValue?.minute ?? '--',
   set: (value) => {
-    emit("update:modelValue", {
+    emit('update:modelValue', {
       hour: props.modelValue?.hour,
       minute: value,
     });
@@ -98,6 +97,25 @@ const selectedMinute = computed({
 const displayTime = computed(() => {
   return `${selectedHour.value}:${selectedMinute.value}`;
 });
+
+onMounted(() => {
+  window.addEventListener('resize', heightCalculation);
+
+  window.addEventListener('scroll', handleScroll, true);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', heightCalculation);
+
+  window.removeEventListener('scroll', handleScroll, true);
+});
+
+function handleScroll(e: Event) {
+  const scrolledElement = e.target as HTMLElement;
+  if (scrolledElement.contains(timePicker.value as Node)) {
+    closeDropdown();
+  }
+}
 
 function formatValue(i: number) {
   return i < 10 ? `0${i}` : String(i);
@@ -128,16 +146,70 @@ function heightCalculation() {
       upSideDown.value = true;
     }
   });
+
+  nextTick(() => {
+    const dropdownComponentListPosition = timePickerComponentDropdowns.value?.getBoundingClientRect();
+    const dropdownPosition = timePicker.value?.getBoundingClientRect();
+    const MIN_HEIGHT = 100;
+    const MIN_GAP = 50;
+
+    if (!dropdownComponentListPosition || !dropdownPosition) {
+      return;
+    }
+
+    let parentElement = timePickerComponentDropdowns.value?.parentElement;
+    let height = 0;
+    while (parentElement) {
+      if (parentElement === document.body) {
+        height = window.innerHeight;
+        break;
+      }
+      if (parentElement.scrollHeight > parentElement.clientHeight) {
+        height = parentElement.getBoundingClientRect().bottom;
+        break;
+      }
+
+      parentElement = parentElement.parentElement;
+    }
+
+    const spaceToBottom = height - dropdownPosition.bottom;
+
+    const spaceRequired = dropdownComponentListPosition.height;
+    let top = dropdownPosition.bottom + 'px';
+    const left = dropdownPosition.left + 'px';
+    let bottom = 'auto';
+    let maxHeight = Math.max(spaceToBottom, MIN_HEIGHT) - MIN_GAP;
+
+    if (Math.min(spaceRequired, 250) <= spaceToBottom) {
+      upSideDown.value = false;
+    } else {
+      upSideDown.value = true;
+      top = 'auto';
+      const spaceToBottom = window.innerHeight - dropdownPosition.bottom;
+      bottom = spaceToBottom + dropdownPosition.height + 'px';
+      maxHeight = Math.max(dropdownPosition.top, MIN_HEIGHT) - MIN_GAP;
+    }
+
+    timePickerComponentDropdowns.value?.setAttribute(
+      'style',
+      `top: ${top};
+       left: ${left};
+       bottom: ${bottom};
+       width: ${dropdownPosition.width}px;
+       max-height: ${maxHeight}px;
+      `
+    );
+  });
 }
 </script>
 
 <script lang="ts">
-import styles from "./_timePickerComponent.scss?inline";
+import styles from './_timePickerComponent.scss?inline';
 
 function injectCss(css: string) {
-  const style = document.createElement("style");
-  style.setAttribute("type", "text/css");
-  style.setAttribute("id", "styles-time-picker-component");
+  const style = document.createElement('style');
+  style.setAttribute('type', 'text/css');
+  style.setAttribute('id', 'styles-time-picker-component');
   document.head.firstChild
     ? document.head.insertBefore(style, document.head.firstChild)
     : document.head.appendChild(style);

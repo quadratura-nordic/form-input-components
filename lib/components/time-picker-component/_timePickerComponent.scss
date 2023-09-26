@@ -17,9 +17,9 @@
 
   .time-picker-dropdowns {
     display: flex;
-    position: absolute;
-    top: 40px;
+    position: fixed;
     width: 100%;
+    z-index: 2;
 
     .time-picker-dropdown-component {
       display: flex;
@@ -30,8 +30,8 @@
       width: 50%;
       transition: all 0.2s ease-in-out;
 
-      input[type="checkbox"],
-      input[type="radio"] {
+      input[type='checkbox'],
+      input[type='radio'] {
         position: absolute;
         opacity: 0;
         left: -99999px;
