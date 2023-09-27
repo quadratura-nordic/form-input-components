@@ -500,13 +500,13 @@ const Ml = /* @__PURE__ */ Se({
           fe(A("input", {
             type: "radio",
             value: c,
-            id: n.valueFunction(c) + "_" + d,
+            id: n.valueFunction(c) + "_" + d + "minute",
             "onUpdate:modelValue": a[0] || (a[0] = (h) => ee(r) ? r.value = h : null)
           }, null, 8, qi), [
             [Gt, L(r)]
           ]),
           A("label", {
-            for: n.valueFunction(c) + "_" + d,
+            for: n.valueFunction(c) + "_" + d + "minute",
             title: n.displayFunction(c)
           }, W(n.displayFunction(c)), 9, Ji)
         ], 2))), 128))

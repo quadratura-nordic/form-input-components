@@ -5,10 +5,9 @@
       <li
         v-for="(option, index) in options"
         :key="index"
-        :class="{ 'picked-value': valueFunction(option) === modelValue }"
-      >
-        <input type="radio" :value="option" :id="valueFunction(option) + '_' + index" v-model="value" />
-        <label :for="valueFunction(option) + '_' + index" :title="displayFunction(option)">{{
+        :class="{ 'picked-value': valueFunction(option) === modelValue }">
+        <input type="radio" :value="option" :id="valueFunction(option) + '_' + index + 'minute'" v-model="value" />
+        <label :for="valueFunction(option) + '_' + index + 'minute'" :title="displayFunction(option)">{{
           displayFunction(option)
         }}</label>
       </li>
@@ -16,9 +15,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineEmits, defineProps, withDefaults, onMounted, computed } from "vue";
+import { defineEmits, defineProps, withDefaults, onMounted, computed } from 'vue';
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 type Option =
   | {
       name: string;
@@ -34,12 +33,12 @@ const props = withDefaults(
     valueFunction?: (option: Option) => string;
   }>(),
   {
-    placeHolder: "Please select",
+    placeHolder: 'Please select',
     displayFunction: (option: any) => {
-      return option.name ?? "--";
+      return option.name ?? '--';
     },
     valueFunction: (option: any) => {
-      return option.value ?? "--";
+      return option.value ?? '--';
     },
   }
 );
@@ -60,7 +59,7 @@ const value = computed({
   },
   set(val: unknown | null) {
     if (val) {
-      emit("update:modelValue", props.valueFunction(val));
+      emit('update:modelValue', props.valueFunction(val));
     }
   },
 });
