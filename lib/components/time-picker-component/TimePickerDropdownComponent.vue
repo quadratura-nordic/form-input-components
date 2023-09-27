@@ -6,8 +6,8 @@
         v-for="(option, index) in options"
         :key="index"
         :class="{ 'picked-value': valueFunction(option) === modelValue }">
-        <input type="radio" :value="option" :id="valueFunction(option) + '_' + index + 'minute'" v-model="value" />
-        <label :for="valueFunction(option) + '_' + index + 'minute'" :title="displayFunction(option)">{{
+        <input type="radio" :value="option" :id="valueFunction(option) + '_' + index + placeHolder" v-model="value" />
+        <label :for="valueFunction(option) + '_' + index + placeHolder" :title="displayFunction(option)">{{
           displayFunction(option)
         }}</label>
       </li>
