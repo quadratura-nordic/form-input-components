@@ -553,7 +553,7 @@ const Il = /* @__PURE__ */ Se({
         var p;
         e("update:modelValue", {
           hour: v,
-          minute: (p = t.modelValue) == null ? void 0 : p.minute
+          minute: ((p = t.modelValue) == null ? void 0 : p.minute) ?? 0
         });
       }
     }), x = $({
@@ -564,7 +564,7 @@ const Il = /* @__PURE__ */ Se({
       set: (v) => {
         var p;
         e("update:modelValue", {
-          hour: (p = t.modelValue) == null ? void 0 : p.hour,
+          hour: ((p = t.modelValue) == null ? void 0 : p.hour) ?? 0,
           minute: v
         });
       }

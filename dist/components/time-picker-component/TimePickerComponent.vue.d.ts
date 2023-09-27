@@ -1,11 +1,11 @@
 declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    modelValue?: {
+    modelValue: {
         hour: number;
         minute: number;
-    } | null | undefined;
-    minuteInterval: number;
-    timeTo: number;
-    timeFrom: number;
+    } | null;
+    minuteInterval?: number | undefined;
+    timeTo?: number | undefined;
+    timeFrom?: number | undefined;
     errorMessage?: string | undefined;
     placeHolder?: string | undefined;
 }>, {
@@ -13,13 +13,13 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     timeFrom: number;
     placeHolder: string;
 }>, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    modelValue?: {
+    modelValue: {
         hour: number;
         minute: number;
-    } | null | undefined;
-    minuteInterval: number;
-    timeTo: number;
-    timeFrom: number;
+    } | null;
+    minuteInterval?: number | undefined;
+    timeTo?: number | undefined;
+    timeFrom?: number | undefined;
     errorMessage?: string | undefined;
     placeHolder?: string | undefined;
 }>, {

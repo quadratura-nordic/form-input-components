@@ -31,10 +31,10 @@ const emit = defineEmits(['update:modelValue']);
 
 const props = withDefaults(
   defineProps<{
-    modelValue?: { hour: number; minute: number } | null;
-    minuteInterval: number;
-    timeTo: number;
-    timeFrom: number;
+    modelValue: { hour: number; minute: number } | null;
+    minuteInterval?: number;
+    timeTo?: number;
+    timeFrom?: number;
     errorMessage?: string;
     placeHolder?: string;
   }>(),
@@ -79,7 +79,7 @@ const selectedHour = computed({
   set(value) {
     emit('update:modelValue', {
       hour: value,
-      minute: props.modelValue?.minute,
+      minute: props.modelValue?.minute ?? 0,
     });
   },
 });
@@ -88,7 +88,7 @@ const selectedMinute = computed({
   get: () => props.modelValue?.minute ?? '--',
   set: (value) => {
     emit('update:modelValue', {
-      hour: props.modelValue?.hour,
+      hour: props.modelValue?.hour ?? 0,
       minute: value,
     });
   },
