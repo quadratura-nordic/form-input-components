@@ -6953,7 +6953,8 @@ const Sl = /* @__PURE__ */ Se({
     disableFutureDates: { type: Boolean, default: !1 },
     disablePastDates: { type: Boolean, default: !1 },
     monthDropdown: { type: Boolean, default: !1 },
-    yearDropdown: { type: Boolean, default: !1 }
+    yearDropdown: { type: Boolean, default: !1 },
+    placeHolder: { default: "Select Date" }
   },
   emits: ["update:modelValue"],
   setup(n, { emit: e }) {
@@ -7117,9 +7118,9 @@ const Sl = /* @__PURE__ */ Se({
           onClick: S,
           modelValue: L(k),
           "onUpdate:modelValue": g[0] || (g[0] = (N) => ee(k) ? k.value = N : null),
-          "place-holder": "Select Date",
+          "place-holder": n.placeHolder,
           "error-message": n.errorMessage
-        }, null, 8, ["modelValue", "error-message"]),
+        }, null, 8, ["modelValue", "place-holder", "error-message"]),
         r.value ? fe((D(), F("div", ll, [
           A("div", ul, [
             A("div", {

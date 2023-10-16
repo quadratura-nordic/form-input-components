@@ -1,4 +1,4 @@
-import type { DateTime } from "./QDateTime";
+import type { DateTime } from './QDateTime';
 declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
     modelValue?: DateTime | null | undefined;
     format?: string | undefined;
@@ -7,12 +7,14 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     disablePastDates?: boolean | undefined;
     monthDropdown?: boolean | undefined;
     yearDropdown?: boolean | undefined;
+    placeHolder?: string | undefined;
 }>, {
     format: string;
     disableFutureDates: boolean;
     disablePastDates: boolean;
     monthDropdown: boolean;
     yearDropdown: boolean;
+    placeHolder: string;
 }>, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
     modelValue?: DateTime | null | undefined;
     format?: string | undefined;
@@ -21,15 +23,18 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     disablePastDates?: boolean | undefined;
     monthDropdown?: boolean | undefined;
     yearDropdown?: boolean | undefined;
+    placeHolder?: string | undefined;
 }>, {
     format: string;
     disableFutureDates: boolean;
     disablePastDates: boolean;
     monthDropdown: boolean;
     yearDropdown: boolean;
+    placeHolder: string;
 }>>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
+    placeHolder: string;
     format: string;
     disableFutureDates: boolean;
     disablePastDates: boolean;

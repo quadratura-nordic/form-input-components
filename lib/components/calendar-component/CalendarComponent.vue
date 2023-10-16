@@ -3,15 +3,13 @@
     class="calendar-component"
     :class="{
       'calendar-component-opened': show,
-    }"
-  >
+    }">
     <InputComponent
       :read-only="true"
       @click="openCalendar"
       v-model="valueString"
-      :place-holder="'Select Date'"
-      :error-message="errorMessage"
-    />
+      :place-holder="placeHolder"
+      :error-message="errorMessage" />
 
     <div class="calendar-container" v-if="show" v-click-outside="close">
       <div class="calendar-header">
@@ -21,8 +19,7 @@
           v-if="monthDropdown"
           :options="monthsArray"
           :place-holder="'Month'"
-          v-model="selectedMonth"
-        />
+          v-model="selectedMonth" />
         <DropdownComponent v-if="yearDropdown" :options="yearsArray" :place-holder="'Year'" v-model="selectedYear" />
         <div class="calendar-arrow right" @click="monthClick(1)"></div>
       </div>
@@ -37,8 +34,7 @@
           v-for="j in 7"
           :key="j"
           :class="date[(i - 1) * 7 + (j - 1)] && date[(i - 1) * 7 + (j - 1)].status"
-          @click="pickDate((i - 1) * 7 + (j - 1))"
-        >
+          @click="pickDate((i - 1) * 7 + (j - 1))">
           {{ date[(i - 1) * 7 + (j - 1)] && date[(i - 1) * 7 + (j - 1)].text }}
         </p>
       </div>
@@ -47,13 +43,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, withDefaults, onMounted, computed, ref, watch, nextTick } from "vue";
+import { defineEmits, defineProps, withDefaults, onMounted, computed, ref, watch, nextTick } from 'vue';
 
-import InputComponent from "../input-component/InputComponent.vue";
-import QDateTime from "./QDateTime";
-import type { DateTime } from "./QDateTime";
-import DropdownComponent from "../dropdown-component/DropdownComponent.vue";
-import type { WritableComputedRef } from "vue";
+import InputComponent from '../input-component/InputComponent.vue';
+import QDateTime from './QDateTime';
+import type { DateTime } from './QDateTime';
+import DropdownComponent from '../dropdown-component/DropdownComponent.vue';
+import type { WritableComputedRef } from 'vue';
 type mapType = {
   YYYY: number;
   MMM: string;
@@ -77,7 +73,7 @@ type dateType = {
     | any;
 };
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const props = withDefaults(
   defineProps<{
@@ -88,68 +84,70 @@ const props = withDefaults(
     disablePastDates?: boolean;
     monthDropdown?: boolean;
     yearDropdown?: boolean;
+    placeHolder?: string;
   }>(),
   {
-    format: "YYYY-MM-DD",
+    format: 'YYYY-MM-DD',
     disableFutureDates: false,
     disablePastDates: false,
     monthDropdown: false,
     yearDropdown: false,
+    placeHolder: 'Select Date',
   }
 );
 
 const show = ref(false);
 const now = ref(QDateTime.locationTime());
 const date = ref([] as dateType[]);
-const months = ref(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
-const days = ref(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+const months = ref(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+const days = ref(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
 const monthsArray = ref([
   {
-    name: "January",
+    name: 'January',
     value: 0,
   },
   {
-    name: "February",
+    name: 'February',
     value: 1,
   },
   {
-    name: "March",
+    name: 'March',
     value: 2,
   },
   {
-    name: "April",
+    name: 'April',
     value: 3,
   },
   {
-    name: "May",
+    name: 'May',
     value: 4,
   },
   {
-    name: "June",
+    name: 'June',
     value: 5,
   },
   {
-    name: "July",
+    name: 'July',
     value: 6,
   },
   {
-    name: "August",
+    name: 'August',
     value: 7,
   },
   {
-    name: "September",
+    name: 'September',
     value: 8,
   },
   {
-    name: "October",
+    name: 'October',
     value: 9,
   },
   {
-    name: "November",
+    name: 'November',
     value: 10,
   },
   {
-    name: "December",
+    name: 'December',
     value: 11,
   },
 ]);
@@ -176,20 +174,20 @@ const value: WritableComputedRef<DateTime | null | undefined> = computed({
     return props.modelValue;
   },
   set(value) {
-    emit("update:modelValue", value);
+    emit('update:modelValue', value);
   },
 });
 
 const valueString = computed(() => {
-  let stringValue = "";
+  let stringValue = '';
   if (value.value == null) {
-    stringValue = "--.--.----";
+    stringValue = '--.--.----';
   } else {
     let stringifyVar = stringify(value.value);
     let day = stringifyVar.substring(8, 10);
     let month = stringifyVar.substring(5, 7);
     let year = stringifyVar.substring(0, 4);
-    stringValue = day + "." + month + "." + year;
+    stringValue = day + '.' + month + '.' + year;
   }
 
   return stringValue;
@@ -208,7 +206,7 @@ const selectedMonth = computed({
 });
 
 onMounted(() => {
-  if (value.value && value.value.toString() == "Invalid DateTime") {
+  if (value.value && value.value.toString() == 'Invalid DateTime') {
     now.value = QDateTime.locationTime();
   } else {
     if (value.value) {
@@ -237,25 +235,25 @@ function update() {
   let time = now.value.set({ day: 1 });
   let curFirstDay = time.weekday;
   // curFirstDay === 0 && (curFirstDay = 7);
-  time = time.minus({ months: 1 }).endOf("month"); // the last day
+  time = time.minus({ months: 1 }).endOf('month'); // the last day
   let lastDayCount = time.day;
   for (let i = curFirstDay - 1; i > 0; i--) {
     arr.push({
       text: lastDayCount - i + 1,
       time: time.set({ day: lastDayCount - i + 1 }),
-      status: "date-pass",
+      status: 'date-pass',
     });
   }
-  time = time.plus({ months: 1 }).endOf("month");
+  time = time.plus({ months: 1 }).endOf('month');
   let curDayCount = time.day;
   let value = valueString.value || stringify(QDateTime.locationTime());
   for (let i = 0; i < curDayCount; i++) {
     let tmpTime = time.set({ day: i + 1 });
-    let status = "";
-    let valueMod = value.split(".");
-    let valueModArr = valueMod[2] + "-" + valueMod[1] + "-" + valueMod[0];
-    stringify(tmpTime) === valueModArr && (status = "date-active");
-    stringify(QDateTime.locationTime()) === stringify(tmpTime) && (status += " date-current");
+    let status = '';
+    let valueMod = value.split('.');
+    let valueModArr = valueMod[2] + '-' + valueMod[1] + '-' + valueMod[0];
+    stringify(tmpTime) === valueModArr && (status = 'date-active');
+    stringify(QDateTime.locationTime()) === stringify(tmpTime) && (status += ' date-current');
     arr.push({
       text: i + 1,
       time: tmpTime,
@@ -268,7 +266,7 @@ function update() {
     arr.push({
       text: j,
       time: time.plus({ months: 1 }).set({ day: j }),
-      status: "date-future",
+      status: 'date-future',
     });
     j++;
   }
@@ -276,7 +274,7 @@ function update() {
   if (props.disableFutureDates) {
     arr.forEach((item) => {
       if (item.time > QDateTime.locationTime()) {
-        item.status += " date-disabled";
+        item.status += ' date-disabled';
       }
     });
   }
@@ -284,7 +282,7 @@ function update() {
   if (props.disablePastDates) {
     arr.forEach((item) => {
       if (item.time < QDateTime.locationTime()) {
-        item.status += " date-disabled";
+        item.status += ' date-disabled';
       }
     });
   }
@@ -297,9 +295,9 @@ function monthClick(flag: number) {
 }
 
 function pickDate(index: number) {
-  if (date.value[index].status.includes("date-disabled")) return;
+  if (date.value[index].status.includes('date-disabled')) return;
   now.value = date.value[index].time.set({ hour: 7, minute: 0 });
-  emit("update:modelValue", now.value);
+  emit('update:modelValue', now.value);
   show.value = false;
 }
 
@@ -312,9 +310,9 @@ function stringify(time = now.value, format = props.format) {
   const map = {
     YYYY: year,
     MMM: monthName,
-    MM: ("0" + month).slice(-2),
+    MM: ('0' + month).slice(-2),
     M: month,
-    DD: ("0" + date).slice(-2),
+    DD: ('0' + date).slice(-2),
     D: date,
   };
 
@@ -328,12 +326,12 @@ function stringify(time = now.value, format = props.format) {
 </script>
 
 <script lang="ts">
-import styles from "./_calendarComponent.scss?inline";
+import styles from './_calendarComponent.scss?inline';
 
 function injectCss(css: string) {
-  const style = document.createElement("style");
-  style.setAttribute("type", "text/css");
-  style.setAttribute("id", "styles-calendar-component");
+  const style = document.createElement('style');
+  style.setAttribute('type', 'text/css');
+  style.setAttribute('id', 'styles-calendar-component');
   document.head.firstChild
     ? document.head.insertBefore(style, document.head.firstChild)
     : document.head.appendChild(style);
