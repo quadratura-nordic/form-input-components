@@ -267,7 +267,9 @@ function getMultiSelectNames() {
     for (let i = 0; i < selectedValue?.length; i++) {
       if (!props.options) return null;
       for (let j = 0; j < props.options.length; j++) {
+        console.log(props.options[j], selectedValue[i], 'props.options[j], selectedValue[i] 1');
         if (JSON.stringify(props.options[j]) === JSON.stringify(selectedValue[i])) {
+          console.log(props.options[j], selectedValue[i], 'props.options[j], selectedValue[i] 2');
           names += props.displayFunction(props.options[j]) + ', ';
         }
       }
