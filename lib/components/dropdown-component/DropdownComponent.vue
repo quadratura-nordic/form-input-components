@@ -272,7 +272,12 @@ function getMultiSelectNames() {
         }
       }
       names = names.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        // check if the first letter is lowercase--if so, capitalize it
+        if (txt.charAt(0) === txt.charAt(0).toLowerCase()) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1);
+        } else {
+          return txt;
+        }
       });
     }
     names = names.slice(0, -2);

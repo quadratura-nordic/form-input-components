@@ -182,7 +182,7 @@ const sr = /* @__PURE__ */ Se({
           for (let g = 0; g < t.options.length; g++)
             t.options[g].value === p[b].value && (M += t.displayFunction(t.options[g]) + ", ");
           M = M.replace(/\w\S*/g, function(g) {
-            return g.charAt(0).toUpperCase() + g.substr(1).toLowerCase();
+            return g.charAt(0) === g.charAt(0).toLowerCase() ? g.charAt(0).toUpperCase() + g.substr(1) : g;
           });
         }
         return M = M.slice(0, -2), (p == null ? void 0 : p.length) > 3 && (M = (p == null ? void 0 : p.length) + " " + t.placeHolder + "s selected "), M;
