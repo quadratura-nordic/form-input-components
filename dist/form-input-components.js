@@ -180,7 +180,7 @@ const sr = /* @__PURE__ */ Se({
           if (!t.options)
             return null;
           for (let g = 0; g < t.options.length; g++)
-            t.options[g] === p[b] && (M += t.displayFunction(t.options[g]) + ", ");
+            JSON.stringify(t.options[g]) === JSON.stringify(p[b]) && (M += t.displayFunction(t.options[g]) + ", ");
           M = M.replace(/\w\S*/g, function(g) {
             return g.charAt(0).toUpperCase() + g.substr(1).toLowerCase();
           });
