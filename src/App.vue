@@ -13,8 +13,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ firstName }}</p>
     </div>
 
@@ -34,8 +33,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ textAreaValue }}</p>
     </div>
 
@@ -50,8 +48,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ checkboxSlider }}</p>
     </div>
 
@@ -67,8 +64,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ dropdownValue }}</p>
     </div>
 
@@ -78,8 +74,7 @@
         v-model="dropdownValueMultiSelect"
         placeHolder="Dropdown"
         :options="dropdownOptions"
-        :multi-select="true"
-      />
+        :multi-select="true" />
       <p class="form-input-box-title">Dropdown Component Multiselect Error</p>
       <DropdownComponent
         v-model="dropdownValueMultiSelect"
@@ -89,8 +84,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
 
       <p class="form-input-value">Value: {{ dropdownValueMultiSelect }}</p>
     </div>
@@ -108,8 +102,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
 
       <p class="form-input-value">Value: {{ dropdownValueMultiSelect }}</p>
     </div>
@@ -119,8 +112,7 @@
       <InputComponentWithSuggestions
         v-model="inputSuggestions"
         placeHolder="Input with suggestions"
-        :suggestions="suggestions"
-      />
+        :suggestions="suggestions" />
 
       <p class="form-input-box-title">Input Component With Suggestions Errors</p>
       <InputComponentWithSuggestions
@@ -130,8 +122,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ inputSuggestions }}</p>
     </div>
 
@@ -146,8 +137,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ inputDate }}</p>
     </div>
 
@@ -158,8 +148,7 @@
         :time-from="7"
         :time-to="22"
         :minute-interval="5"
-        :place-holder="'Select time'"
-      />
+        :place-holder="'Select time'" />
 
       <p class="form-input-box-title">Time Picker Component Error</p>
       <TimePickerComponent
@@ -171,8 +160,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ timeSelected }}</p>
     </div>
 
@@ -198,8 +186,7 @@
         :errorMessage="errorPreview ? 'Required' : ''"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
       <p class="form-input-value">Value: {{ dateSelected }}</p>
     </div>
     <div class="form-input-box">
@@ -220,100 +207,99 @@
         v-model="sliderValue"
         :class="{
           'is-invalid': true,
-        }"
-      />
+        }" />
     </div>
   </div>
   <!-- multiple slider, calendar with dropdowns -->
 </template>
 
 <script setup lang="ts">
-import InputComponent from "../lib/components/input-component/InputComponent.vue";
-import DropdownComponent from "../lib/components/dropdown-component/DropdownComponent.vue";
-import InputComponentWithSuggestions from "../lib/components/input-with-suggestions/InputComponentWithSuggestions.vue";
-import InputDateComponent from "../lib/components/input-date-component/InputDateComponent.vue";
-import TimePickerComponent from "../lib/components/time-picker-component/TimePickerComponent.vue";
-import CalendarComponent from "../lib/components/calendar-component/CalendarComponent.vue";
-import TextAreaComponent from "../lib/components/textarea-component/TextAreaComponent.vue";
-import SliderComponent from "../lib/components/slider-component/SliderComponent.vue";
-import CheckBoxSliderComponent from "../lib/components/checkbox-slider-component/CheckBoxSliderComponent.vue";
-import { ref } from "vue";
+import InputComponent from '../lib/components/input-component/InputComponent.vue';
+import DropdownComponent from '../lib/components/dropdown-component/DropdownComponent.vue';
+import InputComponentWithSuggestions from '../lib/components/input-with-suggestions/InputComponentWithSuggestions.vue';
+import InputDateComponent from '../lib/components/input-date-component/InputDateComponent.vue';
+import TimePickerComponent from '../lib/components/time-picker-component/TimePickerComponent.vue';
+import CalendarComponent from '../lib/components/calendar-component/CalendarComponent.vue';
+import TextAreaComponent from '../lib/components/textarea-component/TextAreaComponent.vue';
+import SliderComponent from '../lib/components/slider-component/SliderComponent.vue';
+import CheckBoxSliderComponent from '../lib/components/checkbox-slider-component/CheckBoxSliderComponent.vue';
+import { ref } from 'vue';
 
-const firstName = ref("");
-const dropdownValue = ref("");
+const firstName = ref('');
+const dropdownValue = ref('');
 const dropdownValueMultiSelect = ref([]);
-const inputDate = ref("");
-const inputSuggestions = ref("");
+const inputDate = ref('');
+const inputSuggestions = ref('');
 const timeSelected = ref(null);
 const dateSelected = ref(null);
-const textAreaValue = ref("");
+const textAreaValue = ref('');
 const sliderValue = ref(0);
 const sliderValue2 = ref(0);
 const sliderValue3 = ref(0);
 const checkboxSlider = ref([]);
 const dropdownOptions = ref([
   {
-    value: "1",
-    name: "Option 1 very long text very long text very long text very long text very long text very long text",
+    value: '1',
+    name: 'Option 1 very long text very long text very long text very long text very long text very long text',
   },
   {
-    value: "2",
-    name: "Option 2",
+    value: '2',
+    name: 'Option 2',
   },
   {
-    value: "3",
-    name: "Option 3",
+    value: '3',
+    name: 'Option 3',
   },
   {
-    value: "4",
-    name: "Option 4",
+    value: '4',
+    name: 'Option 4',
   },
   {
-    value: "5",
-    name: "Option 5",
+    value: '5',
+    name: 'Option 5',
   },
   {
-    value: "6",
-    name: "Option 6",
+    value: '6',
+    name: 'Option 6',
   },
   {
-    value: "7",
-    name: "Option 7",
+    value: '7',
+    name: 'Option 7',
   },
   {
-    value: "8",
-    name: "Option 8",
+    value: '8',
+    name: 'Option 8',
   },
   {
-    value: "9",
-    name: "Option 9",
+    value: '9',
+    name: 'Option 9',
   },
   {
-    value: "10",
-    name: "Option 10",
+    value: '10',
+    name: 'Option 10',
   },
   {
-    value: "11",
-    name: "Option 11",
+    value: '11',
+    name: 'Option 11',
   },
   {
-    value: "12",
-    name: "Option 12",
+    value: '12',
+    name: 'Option 12',
   },
 ]);
 
-const suggestions = ref(["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]);
+const suggestions = ref(['Suggestion 1', 'Suggestion 2', 'Suggestion 3', 'Suggestion 4']);
 const errorPreview = ref(true);
 </script>
 
 <style scoped lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Prompt", sans-serif;
+  font-family: 'Prompt', sans-serif;
 }
 .form-inputs {
   display: flex;

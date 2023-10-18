@@ -3,26 +3,24 @@
     <div
       class="dropdown-component-outside"
       @click="open"
-      :class="{ 'up-side-down': dropdownUpsideDown && opened, 'dropdown-list-opened': opened }"
-    >
+      :class="{ 'up-side-down': dropdownUpsideDown && opened, 'dropdown-list-opened': opened }">
       <p class="dropdown-component-outside-text" v-if="multiSelect ? getMultiSelectNames() : value">
-        {{ errorMessage ? placeHolder + " - " + errorMessage : placeHolder }}
+        {{ errorMessage ? placeHolder + ' - ' + errorMessage : placeHolder }}
       </p>
       <p
         class="dropdown-component-outside-title"
-        :class="{ 'normal-color': multiSelect ? getMultiSelectNames() : value }"
-      >
+        :class="{ 'normal-color': multiSelect ? getMultiSelectNames() : value }">
         {{
           multiSelect
             ? getMultiSelectNames()
               ? getMultiSelectNames()
               : errorMessage
-              ? placeHolder + " - " + errorMessage
+              ? placeHolder + ' - ' + errorMessage
               : placeHolder
             : value && displaySelected()
             ? displaySelected()
             : errorMessage
-            ? placeHolder + " - " + errorMessage
+            ? placeHolder + ' - ' + errorMessage
             : placeHolder
         }}
       </p>
@@ -33,8 +31,7 @@
       v-if="opened"
       v-click-outside="close"
       ref="dropdownComponentList"
-      :class="{ 'up-side-down': dropdownUpsideDown }"
-    >
+      :class="{ 'up-side-down': dropdownUpsideDown }">
       <div class="search-box" v-if="searchBox">
         <InputComponent ref="inputComponent" v-model="searchValue" placeHolder="Search" />
       </div>
@@ -68,8 +65,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { withDefaults, onMounted, computed, ref, nextTick, defineEmits, defineProps, onBeforeUnmount } from "vue";
-import InputComponent from "../input-component/InputComponent.vue";
+import { withDefaults, onMounted, computed, ref, nextTick, defineEmits, defineProps, onBeforeUnmount } from 'vue';
+import InputComponent from '../input-component/InputComponent.vue';
 
 type Option =
   | {
@@ -78,7 +75,7 @@ type Option =
     }
   | unknown;
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const props = withDefaults(
   defineProps<{
@@ -95,22 +92,22 @@ const props = withDefaults(
   }>(),
   {
     displayFunction: (option: any) => {
-      return option.name ?? "--";
+      return option.name ?? '--';
     },
     valueFunction: (option: any) => {
-      return option.value ?? "--";
+      return option.value ?? '--';
     },
-    placeHolder: "Please select",
+    placeHolder: 'Please select',
     multiSelect: false,
     searchBox: false,
     deselectAvailable: false,
-    deselectPlaceHolder: "De select",
+    deselectPlaceHolder: 'De select',
   }
 );
 
 const opened = ref(false);
 const dropdownUpsideDown = ref(false);
-const searchValue = ref("");
+const searchValue = ref('');
 const inputComponent = ref<typeof InputComponent | null>();
 const dropdownComponent = ref<HTMLElement | null>();
 const dropdownComponentList = ref<HTMLElement | null>();
@@ -134,13 +131,13 @@ const value = computed({
   set(val: unknown | null) {
     if (val) {
       if (props.multiSelect) {
-        emit("update:modelValue", val);
+        emit('update:modelValue', val);
       } else {
-        emit("update:modelValue", props.valueFunction(val));
+        emit('update:modelValue', props.valueFunction(val));
         close();
       }
     } else if (props.deselectAvailable && !props.multiSelect && val === null) {
-      emit("update:modelValue", val);
+      emit('update:modelValue', val);
       close();
     }
   },
@@ -160,15 +157,15 @@ const filteredOptions = computed(() => {
 
 onMounted(() => {
   checkLength();
-  window.addEventListener("resize", calculateDropdownPosition);
+  window.addEventListener('resize', calculateDropdownPosition);
 
-  window.addEventListener("scroll", handleScroll, true);
+  window.addEventListener('scroll', handleScroll, true);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", calculateDropdownPosition);
+  window.removeEventListener('resize', calculateDropdownPosition);
 
-  window.removeEventListener("scroll", handleScroll, true);
+  window.removeEventListener('scroll', handleScroll, true);
 });
 
 function handleScroll(e: Event) {
@@ -200,10 +197,11 @@ function open() {
     });
   }
 }
+
 function close() {
   opened.value = false;
   dropdownUpsideDown.value = false;
-  searchValue.value = "";
+  searchValue.value = '';
 }
 
 function calculateDropdownPosition() {
@@ -235,23 +233,23 @@ function calculateDropdownPosition() {
     const spaceToBottom = height - dropdownPosition.bottom;
 
     const spaceRequired = dropdownComponentListPosition.height;
-    let top = dropdownPosition.bottom + "px";
-    const left = dropdownPosition.left + "px";
-    let bottom = "auto";
+    let top = dropdownPosition.bottom + 'px';
+    const left = dropdownPosition.left + 'px';
+    let bottom = 'auto';
     let maxHeight = Math.max(spaceToBottom, MIN_HEIGHT) - MIN_GAP;
 
     if (Math.min(spaceRequired, 250) <= spaceToBottom) {
       dropdownUpsideDown.value = false;
     } else {
       dropdownUpsideDown.value = true;
-      top = "auto";
+      top = 'auto';
       const spaceToBottom = window.innerHeight - dropdownPosition.bottom;
-      bottom = spaceToBottom + dropdownPosition.height + "px";
+      bottom = spaceToBottom + dropdownPosition.height + 'px';
       maxHeight = Math.max(dropdownPosition.top, MIN_HEIGHT) - MIN_GAP;
     }
 
     dropdownComponentList.value?.setAttribute(
-      "style",
+      'style',
       `top: ${top};
        left: ${left};
        bottom: ${bottom};
@@ -265,12 +263,12 @@ function calculateDropdownPosition() {
 function getMultiSelectNames() {
   const selectedValue = value.value as unknown[];
   if (props.multiSelect && selectedValue && selectedValue?.length > 0) {
-    let names = "";
+    let names = '';
     for (let i = 0; i < selectedValue?.length; i++) {
       if (!props.options) return null;
       for (let j = 0; j < props.options.length; j++) {
-        if (props.options[j] === selectedValue[i]) {
-          names += props.displayFunction(props.options[j]) + ", ";
+        if (JSON.stringify(props.options[j]) === JSON.stringify(selectedValue[i])) {
+          names += props.displayFunction(props.options[j]) + ', ';
         }
       }
       names = names.replace(/\w\S*/g, function (txt) {
@@ -279,7 +277,7 @@ function getMultiSelectNames() {
     }
     names = names.slice(0, -2);
     if (selectedValue?.length > 3) {
-      names = selectedValue?.length + " " + props.placeHolder + "s" + " selected ";
+      names = selectedValue?.length + ' ' + props.placeHolder + 's' + ' selected ';
     }
     return names;
   }
@@ -288,12 +286,12 @@ function getMultiSelectNames() {
 </script>
 
 <script lang="ts">
-import styles from "./_dropdownComponent.scss?inline";
+import styles from './_dropdownComponent.scss?inline';
 
 function injectCss(css: string) {
-  const style = document.createElement("style");
-  style.setAttribute("type", "text/css");
-  style.setAttribute("id", "styles-dropdown-component");
+  const style = document.createElement('style');
+  style.setAttribute('type', 'text/css');
+  style.setAttribute('id', 'styles-dropdown-component');
   document.head.firstChild
     ? document.head.insertBefore(style, document.head.firstChild)
     : document.head.appendChild(style);
