@@ -14,7 +14,7 @@
     <div class="calendar-container" v-if="show" v-click-outside="close">
       <div class="calendar-header">
         <div class="calendar-arrow left" @click="monthClick(-1)"></div>
-        <p v-if="!monthDropdown">{{ months[now.month - 1] }} {{ now.year }}</p>
+        <p v-if="!monthDropdown" class="date-text">{{ months[now.month - 1] }} {{ now.year }}</p>
         <DropdownComponent
           v-if="monthDropdown"
           :options="monthsArray"

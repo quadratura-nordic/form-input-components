@@ -65,6 +65,10 @@
       .date-text {
         width: 150px;
         text-align: center;
+        line-height: 15px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--primary-color);
       }
       .calendar-arrow {
         width: 11px;
@@ -73,10 +77,10 @@
         align-items: center;
         flex-shrink: 0;
         &.left {
-          background: url("./calendarIcons.svg") -0 -18px;
+          background: url('./calendarIcons.svg') -0 -18px;
         }
         &.right {
-          background: url("./calendarIcons.svg")-0 -0rem;
+          background: url('./calendarIcons.svg')-0 -0rem;
         }
         &:hover {
           cursor: pointer;
