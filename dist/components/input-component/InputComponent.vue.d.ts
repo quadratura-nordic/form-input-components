@@ -7,6 +7,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     minInput?: number | undefined;
     maxInput?: number | undefined;
     hideClearButton?: boolean | undefined;
+    options?: string[] | undefined;
 }>, {
     inputType: string;
     readOnly: boolean;
@@ -21,6 +22,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     minInput?: number | undefined;
     maxInput?: number | undefined;
     hideClearButton?: boolean | undefined;
+    options?: string[] | undefined;
 }>, {
     inputType: string;
     readOnly: boolean;
