@@ -183,7 +183,7 @@ const valueString = computed(() => {
   if (value.value == null) {
     stringValue = '--.--.----';
   } else {
-    let stringifyVar = stringify(value.value);
+    let stringifyVar = stringify(QDateTime.parse(value.value.toString()) || QDateTime.locationTime());
     let day = stringifyVar.substring(8, 10);
     let month = stringifyVar.substring(5, 7);
     let year = stringifyVar.substring(0, 4);
