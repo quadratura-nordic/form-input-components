@@ -169,7 +169,7 @@ const selectedYear = computed({
     now.value = now.value.set({ year: value });
   },
 });
-const value: WritableComputedRef<DateTime | null | undefined> = computed({
+const value = computed({
   get() {
     return props.modelValue;
   },
@@ -210,7 +210,7 @@ onMounted(() => {
     now.value = QDateTime.locationTime();
   } else {
     if (value.value) {
-      now.value = value.value || QDateTime.locationTime();
+      now.value = QDateTime.parse(value.value.toString()) || QDateTime.locationTime();
     }
   }
 });
