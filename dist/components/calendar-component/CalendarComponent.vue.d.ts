@@ -8,6 +8,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     monthDropdown?: boolean | undefined;
     yearDropdown?: boolean | undefined;
     placeHolder?: string | undefined;
+    showClearButton?: boolean | undefined;
 }>, {
     format: string;
     disableFutureDates: boolean;
@@ -15,6 +16,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     monthDropdown: boolean;
     yearDropdown: boolean;
     placeHolder: string;
+    showClearButton: boolean;
 }>, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
     modelValue?: DateTime | null | undefined;
     format?: string | undefined;
@@ -24,6 +26,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     monthDropdown?: boolean | undefined;
     yearDropdown?: boolean | undefined;
     placeHolder?: string | undefined;
+    showClearButton?: boolean | undefined;
 }>, {
     format: string;
     disableFutureDates: boolean;
@@ -31,6 +34,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     monthDropdown: boolean;
     yearDropdown: boolean;
     placeHolder: string;
+    showClearButton: boolean;
 }>>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
@@ -40,6 +44,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     disablePastDates: boolean;
     monthDropdown: boolean;
     yearDropdown: boolean;
+    showClearButton: boolean;
 }>;
 export default _default;
 type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;

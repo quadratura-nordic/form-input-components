@@ -10,6 +10,7 @@
       v-model="valueString"
       :place-holder="placeHolder"
       :error-message="errorMessage" />
+    <div class="clear-calendar" v-if="showClearButton" :class="{ show: modelValue }" @click="clearModelValue"></div>
 
     <div class="calendar-container" v-if="show" v-click-outside="close">
       <div class="calendar-header">
@@ -49,7 +50,7 @@ import InputComponent from '../input-component/InputComponent.vue';
 import QDateTime from './QDateTime';
 import type { DateTime } from './QDateTime';
 import DropdownComponent from '../dropdown-component/DropdownComponent.vue';
-import type { WritableComputedRef } from 'vue';
+
 type mapType = {
   YYYY: number;
   MMM: string;
@@ -85,6 +86,7 @@ const props = withDefaults(
     monthDropdown?: boolean;
     yearDropdown?: boolean;
     placeHolder?: string;
+    showClearButton?: boolean;
   }>(),
   {
     format: 'YYYY-MM-DD',
@@ -93,6 +95,7 @@ const props = withDefaults(
     monthDropdown: false,
     yearDropdown: false,
     placeHolder: 'Select Date',
+    showClearButton: true,
   }
 );
 
@@ -322,6 +325,10 @@ function stringify(time = now.value, format = props.format) {
     }
     return str;
   });
+}
+
+function clearModelValue() {
+  value.value = null;
 }
 </script>
 
