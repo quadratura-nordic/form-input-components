@@ -13,7 +13,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     readOnly: boolean;
 }>, {
     focusInput: () => void;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "blur")[], "update:modelValue" | "blur", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
     inputType?: string | undefined;
     placeHolder?: string | undefined;
     errorMessage?: string | undefined;
@@ -28,6 +28,7 @@ declare const _default: import("vue").DefineComponent<__VLS_WithDefaults<__VLS_T
     readOnly: boolean;
 }>>> & {
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onBlur?: ((...args: any[]) => any) | undefined;
 }, {
     inputType: string;
     readOnly: boolean;

@@ -12,6 +12,7 @@
       v-model="val"
       :readonly="readOnly"
       :list="'options' + id"
+      @blur="emit('blur', $event)"
       ref="inputComponent"
       :min="minInput"
       :max="maxInput" />
@@ -31,7 +32,7 @@
 <script setup lang="ts">
 import { computed, defineEmits, defineProps, withDefaults, ref, defineExpose } from 'vue';
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'blur']);
 const inputComponent = ref<HTMLInputElement | null>(null);
 
 const props = withDefaults(

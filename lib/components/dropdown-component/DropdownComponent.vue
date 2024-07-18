@@ -1,8 +1,15 @@
 <template>
-  <div class="dropdown-component" id="dropdown-component" ref="dropdownComponent">
+  <div
+    class="dropdown-component"
+    id="dropdown-component"
+    ref="dropdownComponent"
+    tabindex="0"
+    @focus="open"
+    @keydown="handleKeyDown"
+    @blur="closeViaBlur($event)">
     <div
       class="dropdown-component-outside"
-      @click="open"
+      @mousedown.prevent="opened ? close() : open()"
       :class="{ 'up-side-down': dropdownUpsideDown && opened, 'dropdown-list-opened': opened }">
       <p class="dropdown-component-outside-text" v-if="multiSelect ? getMultiSelectNames() : value">
         {{ errorMessage ? placeHolder + ' - ' + errorMessage : placeHolder }}
@@ -29,18 +36,23 @@
     <div
       class="dropdown-component-opened"
       v-if="opened"
-      v-click-outside="close"
       ref="dropdownComponentList"
       :class="{ 'up-side-down': dropdownUpsideDown }">
       <div class="search-box" v-if="searchBox">
-        <InputComponent ref="inputComponent" v-model="searchValue" placeHolder="Search" />
+        <InputComponent ref="inputComponent" v-model="searchValue" placeHolder="Search" @blur="closeViaBlurInput" />
       </div>
       <ul>
         <li v-if="!multiSelect && deselectAvailable">
           <input type="radio" :value="null" id="deselect_option" v-model="value" />
           <label for="deselect_option">{{ deselectPlaceHolder }}</label>
         </li>
-        <li v-for="(option, index) in filteredOptions" :key="index">
+        <li
+          v-for="(option, index) in filteredOptions"
+          :key="index"
+          @mouseenter="focusedItemIndex = index"
+          :class="{
+            highlighted: focusedItemIndex === index,
+          }">
           <div class="checkbox" v-if="multiSelect">
             <input type="checkbox" :value="option" :id="valueFunction(option) + '_' + index" v-model="value" />
             <label
@@ -181,27 +193,138 @@ function checkLength() {
   }
 }
 
+const typed = ref('');
+const timeoutTyped = ref(0);
+const focusedItemIndex = ref(-1);
+
+function handleKeyDown(e: KeyboardEvent) {
+  if (e.target !== dropdownComponent.value) {
+    return;
+  }
+
+  if (e.key === 'Escape' || e.key === 'Tab') {
+    close();
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (focusedItemIndex.value + 1 >= filteredOptions.value.length) {
+      return;
+    }
+    focusedItemIndex.value++;
+
+    const focusedItem = dropdownComponentList.value?.querySelectorAll('li')[focusedItemIndex.value];
+    focusedItem?.scrollIntoView({ block: 'nearest' });
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (focusedItemIndex.value === -1) {
+      focusedItemIndex.value = filteredOptions.value.length - 1;
+    } else if (focusedItemIndex.value > 0) {
+      focusedItemIndex.value--;
+    }
+
+    const focusedItem = dropdownComponentList.value?.querySelectorAll('li')[focusedItemIndex.value];
+    focusedItem?.scrollIntoView({ block: 'nearest' });
+  } else if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar' || e.key === 'Space') {
+    e.preventDefault();
+    if (opened.value) {
+      if (focusedItemIndex.value >= 0 && filteredOptions.value[focusedItemIndex.value]) {
+        if (props.multiSelect && Array.isArray(value.value)) {
+          if (value.value.includes(filteredOptions.value[focusedItemIndex.value])) {
+            value.value = value.value.filter((item) => item !== filteredOptions.value[focusedItemIndex.value]);
+          } else {
+            value.value = [...value.value, filteredOptions.value[focusedItemIndex.value]];
+          }
+        } else {
+          value.value = filteredOptions.value[focusedItemIndex.value];
+          close();
+        }
+      }
+    } else {
+      open();
+    }
+  } else if (
+    (e.keyCode >= 48 && e.keyCode <= 57) ||
+    (e.keyCode >= 65 && e.keyCode <= 90) ||
+    (e.keyCode >= 96 && e.keyCode <= 105)
+  ) {
+    e.preventDefault();
+    typed.value += e.key;
+    const filteredOptions = props.options?.filter((option) => {
+      return props.displayFunction(option).toLowerCase().startsWith(typed.value.toLowerCase());
+    });
+    if (timeoutTyped.value) {
+      clearTimeout(timeoutTyped.value);
+    }
+
+    timeoutTyped.value = window.setTimeout(() => {
+      typed.value = '';
+    }, 1000);
+    if (filteredOptions && filteredOptions?.length > 0) {
+      focusedItemIndex.value = props.options?.indexOf(filteredOptions[0]) ?? -1;
+      const focusedItem = dropdownComponentList.value?.querySelectorAll('li')[focusedItemIndex.value];
+      focusedItem?.scrollIntoView({ block: 'nearest' });
+      setTimeout(() => {
+        focusedItemIndex.value = props.options?.indexOf(filteredOptions[0]) ?? -1;
+      }, 10);
+    }
+  }
+}
+
 function displaySelected() {
   if (value.value) {
     return props.displayFunction(value.value);
   }
   return props.placeHolder;
 }
-
-function open() {
-  opened.value = true;
-  calculateDropdownPosition();
-  if (props.searchBox) {
-    nextTick(() => {
-      inputComponent.value?.focusInput();
-    });
+function closeViaBlurInput(e: FocusEvent) {
+  if (!(dropdownComponent.value === e.relatedTarget) && !(dropdownComponentList.value === e.relatedTarget)) {
+    close();
   }
+}
+function open() {
+  if (opened.value) {
+    return;
+  }
+  opened.value = true;
+
+  nextTick(() => {
+    dropdownComponent.value?.focus();
+    calculateDropdownPosition();
+    nextTick(() => {
+      if (props.options) {
+        if (props.multiSelect) {
+          for (let i = 0; i < props.options.length; i++) {
+            if (Array.isArray(props.modelValue) && props.modelValue.includes(props.options[i])) {
+              focusedItemIndex.value = i;
+              const focusedItem = dropdownComponentList.value?.querySelectorAll('li')[focusedItemIndex.value];
+              focusedItem?.scrollIntoView({ block: 'start' });
+              break;
+            }
+          }
+        } else {
+          for (let i = 0; i < props.options?.length; i++) {
+            if (props.valueFunction(props.options[i]) === props.modelValue) {
+              focusedItemIndex.value = i;
+              const focusedItem = dropdownComponentList.value?.querySelectorAll('li')[focusedItemIndex.value];
+              focusedItem?.scrollIntoView({ block: 'start' });
+            }
+          }
+        }
+      }
+      if (props.searchBox) {
+        inputComponent.value?.focusInput();
+      }
+    });
+  });
 }
 
 function close() {
+  if (!opened.value) {
+    return;
+  }
   opened.value = false;
   dropdownUpsideDown.value = false;
   searchValue.value = '';
+  focusedItemIndex.value = -1;
 }
 
 function calculateDropdownPosition() {
@@ -267,10 +390,13 @@ function getMultiSelectNames() {
     for (let i = 0; i < selectedValue?.length; i++) {
       if (!props.options) return null;
       for (let j = 0; j < props.options.length; j++) {
-        if ((props.options[j] as any).value === (selectedValue[i] as any).value) {
+        if (props.options[j] === selectedValue[i]) {
           names += props.displayFunction(props.options[j]) + ', ';
         }
       }
+      names = names.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
     }
     names = names.slice(0, -2);
     if (selectedValue?.length > 3) {
@@ -279,6 +405,15 @@ function getMultiSelectNames() {
     return names;
   }
   return null;
+}
+
+function closeViaBlur(e: FocusEvent) {
+  if (
+    !dropdownComponent.value?.contains(e.relatedTarget as Node) &&
+    !dropdownComponentList.value?.contains(e.relatedTarget as Node)
+  ) {
+    close();
+  }
 }
 </script>
 
