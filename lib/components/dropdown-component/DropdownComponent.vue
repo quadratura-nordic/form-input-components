@@ -4,9 +4,9 @@
     id="dropdown-component"
     ref="dropdownComponent"
     tabindex="0"
-    @focus="open"
     @keydown="handleKeyDown"
-    @blur="closeViaBlur($event)">
+    @focusin="open"
+    @focusout="closeViaBlur($event)">
     <div
       class="dropdown-component-outside"
       @mousedown.prevent="opened ? close() : open()"
@@ -39,7 +39,7 @@
       ref="dropdownComponentList"
       :class="{ 'up-side-down': dropdownUpsideDown }">
       <div class="search-box" v-if="searchBox">
-        <InputComponent ref="inputComponent" v-model="searchValue" placeHolder="Search" @blur="closeViaBlurInput" />
+        <InputComponent ref="inputComponent" v-model="searchValue" placeHolder="Search" />
       </div>
       <ul>
         <li v-if="!multiSelect && deselectAvailable">
@@ -275,11 +275,7 @@ function displaySelected() {
   }
   return props.placeHolder;
 }
-function closeViaBlurInput(e: FocusEvent) {
-  if (!(dropdownComponent.value === e.relatedTarget) && !(dropdownComponentList.value === e.relatedTarget)) {
-    close();
-  }
-}
+
 function open() {
   if (opened.value) {
     return;
